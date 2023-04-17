@@ -1,0 +1,220 @@
+#########################################################
+######                  Learn YAML                 ######
+#########################################################
+
+# En este documento veremos las cosas básicas sobre YAML
+
+---   # inicio del documento
+
+# Los comentarios en YAML se ven así.
+# YAML admite comentarios de una sola línea.
+
+################
+# TIPOS ESCALAR #
+###############
+
+# Nuestro objeto raíz (que continúa para el documento) será un mapa,
+# que es equivalente a un diccionario, hash u objeto en otros idiomas.
+clave :  valor
+otra_clave :  Otro valor va aquí.
+a_number_value :  100
+Scientific_notation :  1e+12
+hex_notation :  0x123   # se evalúa como 291
+octal_notation :  0123  # se evalúa como 83
+
+# El número 1 será interpretado como un número, no como un booleano.
+# Si quiere que se interprete como un valor booleano, use true.
+booleano :  verdadero
+valor_nulo :  nulo
+otro_valor_nulo :  ~
+clave con espacios :  valor
+
+# Sí y No (no importa el caso) se evaluarán como
+valores booleanos # verdaderos y falsos respectivamente.
+# Para usar el valor real, use comillas simples o dobles.
+no :  no             # se evalúa como "falso": falso
+sí :  no            # se evalúa como "verdadero": falso
+no_encerrado :  sí  # se evalúa como "no_encerrado": verdadero
+encerrado :  "sí"    # se evalúa como "cerrado": sí
+
+# Tenga en cuenta que las cadenas no necesitan estar entrecomilladas. Sin embargo, pueden serlo.
+sin embargo :  'Una cadena, encerrada entre comillas.' 'Las llaves también se pueden citar .' : "Útil si desea poner un ' :' en su clave ". comillas simples : 'tener '' un '' patrón de escape ' comillas dobles : "tener muchos: \", \0, \t, \u263A , \x0d\x0a == \r\n,
+
+
+           más."
+# Los caracteres UTF-8/16/32 deben codificarse
+Superíndice dos :  \u00B2
+
+# Los caracteres especiales deben estar entre comillas simples o dobles
+caracteres_especiales :  "[ John ] & { Jane } - <Doe>"
+
+# Las cadenas de varias líneas se pueden escribir como un 'bloque literal' (usando |),
+# o como un 'bloque plegado' (usando '>').
+# El bloque literal convierte cada salto de línea dentro de la cadena en un salto de línea literal (\n).
+# El bloque plegado elimina las líneas nuevas dentro de la cadena.
+bloque_literal :  |
+  Todo este bloque de texto será el valor de la clave 'literal_block',
+  conservando los saltos de línea.
+
+  El literal continúa hasta que se elimina la abolladura y se
+  elimina la sangría inicial.
+
+      Cualquier línea que tenga "más sangría" mantendrá el resto de su sangría;
+      estas líneas tendrán una sangría de 4 espacios.
+estilo_doblado :  >
+  Todo este bloque de texto tendrá el valor de 'estilo_doblado', pero esta
+  vez, todas las líneas nuevas serán reemplazadas por un solo espacio.
+
+  Las líneas en blanco, como arriba, se convierten en un carácter de nueva línea.
+
+      Las líneas 'más sangradas' también mantienen sus líneas nuevas:
+      este texto aparecerá en dos líneas.
+
+# |- y >- elimina las líneas en blanco finales (también llamado literal/bloque "strip")
+literal_strip :  |-
+  Este bloque completo de texto será el valor de la clave 'literal_block',
+  con la línea en blanco final siendo eliminada.
+block_strip :  >-
+  Este bloque completo de texto tendrá el valor de 'folded_style', pero esta
+  vez, todas las nuevas líneas se reemplazarán con un solo espacio y
+  se eliminará la línea en blanco final.
+
+# |+ y >+ mantiene líneas en blanco al final (también llamado literal/bloque "mantener")
+literal_keep :  |+
+  Todo este bloque de texto será el valor de la clave 'literal_block',
+  con la línea en blanco al final mantenida.
+
+block_keep :  >+
+  Todo este bloque de texto tendrá el valor de 'folded_style', pero esta
+  vez, todas las nuevas líneas se reemplazarán con un solo espacio y
+  se mantendrá la línea en blanco al final.
+
+###################
+# TIPOS DE COLECCIÓN #
+####################
+
+# El anidamiento usa sangría. Se prefiere una sangría de 2 espacios (pero no es obligatorio).
+un_mapa_anidado :
+  clave :  valor
+  otra_clave :  otro valor
+  otro_mapa_anidado :
+    hola :  hola
+
+# Los mapas no tienen que tener claves de cadena.
+0.25 :  una tecla flotante
+
+# Las teclas también pueden ser complejas, como objetos de varias líneas
+# ¿Usamos ? seguido de un espacio para indicar el inicio de una clave compleja.
+?  |
+  Esta es una clave
+  que tiene varias líneas
+:  y este es su valor
+
+# YAML también permite el mapeo entre secuencias con la sintaxis de clave compleja
+# Algunos analizadores de idiomas pueden quejarse
+# ¿Un ejemplo
+?  -  Manchester United
+  -  Real Madrid
+:  [  2001-01-01 ,  2002-02-02  ]
+
+# Las secuencias (equivalentes a listas o arreglos) se ven así
+# (tenga en cuenta que el '-' cuenta como sangría):
+a_sequence :
+  -  Elemento 1
+  -  Elemento 2
+  -  0.5   # Las secuencias pueden contener tipos dispares.
+  -  Elemento 4
+  -  clave :  valor
+    otra_clave :  otro_valor
+  -  -  Esta es una secuencia
+    -  dentro de otra secuencia
+  -  -  -  Indicadores de secuencia anidados
+      -  se pueden contraer
+
+# Dado que YAML es un superconjunto de JSON, también puede escribir mapas de estilo JSON y
+# secuencias:
+json_map :  {  "key" :  "value"  }
+json_seq :  [  3 ,  2 ,  1 ,  "takeoff"  ]
+y las comillas son opcionales :  {  tecla :  [  3 ,  2 ,  1 ,  despegue  ]  }
+
+######################
+# CARACTERÍSTICAS ADICIONALES DE YAML #
+##################### #
+
+# YAML también tiene una función útil llamada 'anclajes', que le permite duplicar fácilmente
+# contenido en su documento.
+# Anclajes identificados por & carácter que definen el valor.
+# Alias ​​identificados por el carácter * que actúa como comando "ver arriba".
+# Ambas claves tendrán el mismo valor:
+contenido_anclado :  &nombre_ancla  Esta cadena aparecerá como el valor de dos claves.
+otro_ancla :  *nombre_ancla
+
+# Los anclajes se pueden usar para duplicar/heredar propiedades
+base : &  nombre base
+  : Todos tienen el mismo nombre
+
+# La expresión regular << se llama 'Combinar clave de tipo independiente del idioma'. Se utiliza para
+# indicar que todas las claves de uno o más mapas especificados deben insertarse
+# en el mapa actual.
+# NOTA: Si la clave ya existe, el alias no se fusionará
+foo :
+  << :  *base  # no fusiona el ancla
+  edad :  10
+  nombre :  John
+bar :
+  << :  *base  # el ancla base se fusionará
+  edad :  20
+
+# foo y bar también tendrían nombre: Todos tienen el mismo nombre
+
+# YAML también tiene etiquetas, que puede usar para declarar tipos explícitamente.
+# Sintaxis: !![typeName] [value]
+explicit_boolean :  !!bool  true
+explícito_integer :  !!int  42
+explícito_float :  !!float  -42.24
+explicit_string :  !!str  0.5
+explicit_datetime :  !!timestamp  2022-11-17 12:34: 56.78 +9
+explícito_null :  !!null  null
+
+# Algunos analizadores implementan etiquetas específicas del idioma, como esta para el
+# tipo de número complejo de Python.
+python_complex_number :  !!python/complejo  1+2j
+
+# ¿También podemos usar claves complejas yaml con etiquetas específicas del idioma
+?  !!python/tuple  [  5 ,  7  ]
+:  Fifty Seven
+# Sería {(5, 7): 'Fifty Seven'} en Python
+
+###################
+# TIPOS EXTRA DE YAML #
+####################
+
+# Las cadenas y los números no son los únicos escalares que YAML puede entender.
+# También se analizan los literales de fecha y hora con formato ISO.
+datetime_canonical :  2001-12-15T02:59:43.1Z
+datetime_space_separated_with_time_zone :  2001-12-14 21:59:43.10 -5
+date_implicit :  2002-12-14
+date_explicit :  !!timestamp  2002-12-14
+
+# La etiqueta !!binary indica que una cadena es en realidad una representación # codificada en base64
+de un blob binario.
+archivo_gif :  !!binario  |
+  R0lGODlhDAAMAIQAAP//9/X17unp5WZmZgAAAOfn515eXvPz7Y6OjuDg4J+fn5
+  OTk6enp56enmlpaWNjY6Ojo4SEhP/++f/++f/++f/++f/++f/++f/++f/++f/+ +f
+  /++f/ ++f/++f/++f/++SH+Dk1hZGUgd2l0aCBHSU1QACwAAAAADAAMAAAFLC
+  AgjoEwnuNAFOhpEMTRiggcz4BNJHrv/zCFcLiwMWYNG84BwwEeECcgggoBADs=
+
+
+# YAML también tiene un tipo de conjunto, que se ve así: conjunto :?
+  artículo1 ? artículo2 ? elemento3 o : { elemento1 , elemento2 , elemento3 }
+
+
+
+
+# Los conjuntos son solo mapas con valores nulos; lo anterior es equivalente a:
+set2 :
+  item1 :  null
+  item2 :  null
+  item3 :  null
+
+...   # fin del documento
