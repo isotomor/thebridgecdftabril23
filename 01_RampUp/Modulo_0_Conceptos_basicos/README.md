@@ -7,7 +7,7 @@
 
 En este módulo veremos todo lo que necesitamos saber sobre el funcionamiento de Github. 
 
-Aquí disponemos de la documentación del módulo: [Git y Github.pdf](Git/Git y Github.pdf)
+Aquí disponemos de la documentación del módulo: [Git y Github.pdf](Git/Git_Github.pdf)
 
 Por otro lado, en la carpeta [Cheat_sheet](Git/Cheat_sheet) tenéis disposibles atajos importantes que ustilizar. 
 Hay 3 ficheros con información similar, podéis coger el que más os interese. 
