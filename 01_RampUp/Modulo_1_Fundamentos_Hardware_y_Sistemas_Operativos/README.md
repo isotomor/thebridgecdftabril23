@@ -7,6 +7,8 @@ Todo el contenido de este material se dará con la documentación de la siguient
 
 [Drive: Fundamentos de Hardware](https://docs.google.com/presentation/d/1AHngMyydSdPvNuZL_d6hnhUu6bOnBvLONFvZSuT7Eoc/edit?usp=sharing)
 
+Video de funcionamiento de las distintas piezas del hardware [pinche aquí](https://www.youtube.com/watch?v=0zkX6nlpiSk)
+
 ## Fundamentos de Software. 
 
 Todo el contenido de este material se dará con la documentación de la siguiente ruta: 
