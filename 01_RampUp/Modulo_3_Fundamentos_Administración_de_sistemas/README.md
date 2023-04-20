@@ -25,10 +25,10 @@ Libro con todo el contenido de powershell: [PowerShell Notes for professionals b
 
 La documentación de este módulo la veremos con un fichero [README](Bash)
 
-- [Más comandos básicos](https://github.com/isotomor/thebridgecdptenero23/blob/main/01%20-%20RampUp/Modulo%203%20-%20Fundamentos%20de%20Administraci%C3%B3n%20de%20sistemas/Bash/Comandos%20basicos%20linux/M%C3%A1s%20comandos%20b%C3%A1sicos.pdf)
-- [Anexo Comandos Linux](https://github.com/isotomor/thebridgecdptenero23/blob/main/01%20-%20RampUp/Modulo%203%20-%20Fundamentos%20de%20Administraci%C3%B3n%20de%20sistemas/Bash/Comandos%20basicos%20linux/Anexo_Comandos_Linux.pdf)
-- [Chuleta shell script](https://github.com/isotomor/thebridgecdptenero23/raw/main/01%20-%20RampUp/Modulo%203%20-%20Fundamentos%20de%20Administraci%C3%B3n%20de%20sistemas/Bash/Comandos%20basicos%20linux/chuleta-shell-script.pdf)
-- [Comandos Linux Completo](https://github.com/isotomor/thebridgecdptenero23/raw/main/01%20-%20RampUp/Modulo%203%20-%20Fundamentos%20de%20Administraci%C3%B3n%20de%20sistemas/Bash/Comandos%20basicos%20linux/Comandos%20Linux%20Completo.pdf)
+- [Más comandos básicos](Bash/Comandos_basicos_linux/Más%20comandos%20básicos.pdf)
+- [Anexo Comandos Linux](Bash/Comandos_basicos_linux/Anexo_Comandos_Linux.pdf)
+- [Chuleta shell script](Bash/Comandos_basicos_linux/chuleta-shell-script.pdf)
+- [Comandos Linux Completo](Bash/Comandos_basicos_linux/Comandos%20Linux%20Completo.pdf)
 
 ## SSH
 
