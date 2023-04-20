@@ -108,7 +108,7 @@
   - **Edubuntu**: Otro derivado de Ubuntu, pero en esta ocasión especialmente dirigido a escuelas y profesores. Ofrece una gran colección de software y herramientas educativas, por lo que también es una buena opción para instalar en los ordenadores de los más jóvenes de la casa.
   - **Openelec**: Pequeña distribución Linux creada desde cero para convertir un ordenador en un centro multimedia basado en Kodi, lo que antes se conocía como XBMC. Hace lo que promete y necesita sólo 90-125 MB de almacenamiento interno. A parte de su versión oficial, tiene otras dos buids para Raspberry Pi y Apple TV.
   
-[Evolucion de las distribuciones.png](https://github.com/isotomor/thebridgecdptenero23/raw/main/01%20-%20RampUp/Modulo%203%20-%20Fundamentos%20de%20Administraci%C3%B3n%20de%20sistemas/Bash/img/Evolucion%20de%20las%20distribuciones.png)
+[Evolucion de las distribuciones.png](img/Evolucion_de_las_distribuciones.png)
 
 ## Comenzando con Linux
 ***
