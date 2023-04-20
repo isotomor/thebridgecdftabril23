@@ -9,6 +9,8 @@ Todo el contenido de este material se dará con la documentación de la siguient
 
 Video de funcionamiento de las distintas piezas del hardware [pinche aquí](https://www.youtube.com/watch?v=0zkX6nlpiSk)
 
+Video del funcionamiento de la RAM: [pinche aquí](https://discordapp.com/channels/1097481751011537069/1097481751858794549/1098299879895355413)
+
 ## Fundamentos de Software. 
 
 Todo el contenido de este material se dará con la documentación de la siguiente ruta: 
