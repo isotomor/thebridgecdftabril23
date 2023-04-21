@@ -852,7 +852,7 @@ exit 0
 
 ```bash
 #!/bin/bash
-declare -icounter
+declare -i counter
 counter=10
   while [ $counter -gt 2 ]; do
     echo El Contador marca $counter
@@ -863,6 +863,7 @@ exit 0
 - En este caso la condición de salida del bucle Whiletiene un operador -gt(mayor que). Como en el if, el fin de la condición se marca con un ;
 - Después, el conjunto de instrucciones a realizar se enmarca en una estructura do… done, como en el bucle for.
 
+![img.png](img/comparador_conficionales.png)
 
 ### Parámetros en Shell script
 
