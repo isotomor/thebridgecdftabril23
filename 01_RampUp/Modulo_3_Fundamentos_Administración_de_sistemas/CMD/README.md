@@ -380,7 +380,7 @@ Ejemplo:
 for %%f in (c:\windows\*.*) do @echo %%f
 
 :: Para ejecutar con la línea de comandos. 
-for %%f in (c:\windows\*.*) do @echo %%f
+for %f in (c:\windows\*.*) do @echo %f
 
 :: Nos mostrará los archivos que estánd entro de la carpeta c:\windows 
 :: (similar a un "dir" pero solo nos mostrará el nombre. 
@@ -626,9 +626,9 @@ if %c%==10 (echo "The value of variable c is 10") else (echo "Unknown value")
 * Ejemplo de condicional para cadenas:
 
 ````cmd
-echo off
-SET str1 = String1
-SET str2 = String2
+@echo off
+SET str1= String1
+SET str2= String2
 if %str1%==String1 (echo "The value of variable String1") else (echo "Unknown value")
 if %str2%==String3 (echo "The value of variable c is String3") else (echo "Unknown value")
 ````
