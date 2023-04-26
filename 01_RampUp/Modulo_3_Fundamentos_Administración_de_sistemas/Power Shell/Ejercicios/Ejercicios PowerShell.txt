@@ -1,0 +1,24 @@
+Ejercicios Sencillos PowerShell
+
+1. Dentro de la carpeta que acabas de hacer, crea un cmdlet de PowerShell llamado saludo1.ps1
+que defina dos variables: un $nombre y un $saludo. Luego muestra por consola un mensaje en el que se muestre ese saludo y ese nombre.
+
+2. Crea un cmdlet de PowerShell como el anterior llamado saludo2.ps1, pero en lugar de definir dos variables
+las debe recoger como argumentos de la consola.
+
+3.Crea un cmdlet de PowerShell como el anterior llamado saludo3.ps1 pero en lugar de definir o recoger variables
+como argumentos, debe solicitárselos al usuario con Read
+
+4.Crea un cmdlet de PowerShell que recoja dos variables por consola con Read y lleve a cabo todas las operaciones
+aritméticas entre ellas y las muestre por consola.
+
+5.Crea un cmdlet de PowerShell que solicite dos números enteros al usuario. El cmdlet debe  decirnos si uno es mayor,
+menor o igual que el otro.
+
+6. Crea un cmdlet que solicite al usuario un número, verifique que es positivo y programa un bucle para que muestre
+por consola la palabra FAP tantas veces como indique el número.
+
+7. Crea un cmdlet que solicite al usuario un número. Mientras lo que introduzca el usuario no esté entre 1 y 100 se
+lo tiene que solicitar una y otra vez. Una vez introducido el número correcto el programa debe hacer lo siguiente:
+si ha cometido algún error al introducir un número válido debe hacerse un bucle en el que se increpe al usuario tantas
+veces como errores haya cometido. Si lo hizo bien a la primera saca un mensaje que diga: campeón.
