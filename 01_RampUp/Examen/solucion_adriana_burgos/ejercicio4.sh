@@ -9,8 +9,8 @@ declare -i i
 declare -i res
 i=1
 res=0
-# Recibimos el numero del usuario
 
+# Recibimos el numero del usuario
 echo "Dame un numero"
   read num
 echo "vamos a imprimir la tabla del $num :"
