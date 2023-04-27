@@ -63,3 +63,5 @@ Despues de leer el manual de como añadir las datos para programar la tares aña
 Este por ejemplo nos dice que la tarea se ejecute todos los dias a las 2:30am
 
 Se guarda con ctrl+X y listo. O ya deberia, de todas meneras lo probare :).
+
+pdt: En este caso esta forma que encontre no solo hace el backup sino que tb nos borra el backup mas antiguo en caso de que haya 4 y nos manda un correo para que se nos avise.
