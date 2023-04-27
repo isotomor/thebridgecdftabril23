@@ -18,13 +18,32 @@ sudo usermod -aG Operaciones,Marketing carolina
 sudo usermod -aG Marketing karla
 sudo usermod -aG Marketing alejandra
 
+
+#con esto verifico los usuarios en ue grupos estan
+grep carolina /etc/group
+
 #Crear también tres carpetas con archivos: FileDev, FileOps y FileMark, asignar permisos para cada grupo de tal manera, que:
+
+
+ mkdir FileDev 
+ mkdir FileOps
+ mkdir FileMark
 
 #FileDev, acceso total para Desarrollo y sólo lectura para Operaciones y Marketing
 
+sudo chgrp Desarrollo FileDev
+chmod g+r FileDev
 
 
 #FileOps, lectura y escritura para Operaciones, y solo lectura para Desarrollo y Marketing
+
+
+sudo chgrp Operaciones FileOps
+chmod g+rw FileOps
+
 #FileMark, acceso total para Marketing, y lectura y ejecución para el resto.
 
+sudo chgrp Marketing FileMark
+chmod g+rwx FileMark
+chmod o+rx FileMark
 
