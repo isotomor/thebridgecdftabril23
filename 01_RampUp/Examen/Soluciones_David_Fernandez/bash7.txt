@@ -1,0 +1,5 @@
+7. Averiguar cómo podríamos hacer backups cada cierto tiempo. (Si se puede, especificar herramientas y comandos a ejecutar).
+
+Para cerar bakcups cada cierto tiempo podríamos utilizar 'cron' y el comando 'tar'. 
+- Con el comando 'tar' podemos crear un archivo de backup comprimido indicando la ruta en la que queremos guardar el backup y la ruta de la que queremos hacer el backup.
+- Con 'cron' podemos programar la tarea del bakcup cada dierto tiempo.
