@@ -1,0 +1,30 @@
+#Crear tres grupos de usuarios: Desarrollo, Operaciones, Marketing, crear también 4 usuarios (los nombres los elegís vosotros y a qué grupos asignarlos) 
+
+#Crear tres grupos de usuarios: Desarrollo, Operaciones, Marketing, 
+sudo groupadd Desarrollo
+sudo groupadd Operaciones
+sudo groupadd Marketing
+
+
+#crear también 4 usuarios 
+sudo useradd -m -s /bin/bash ninoska
+sudo useradd -m -s /bin/bash carolina
+sudo useradd -m -s /bin/bash karla
+sudo useradd -m -s /bin/bash alejandra
+
+#asignar los grupos
+sudo usermod -aG Desarrollo ninoska
+sudo usermod -aG Operaciones,Marketing carolina
+sudo usermod -aG Marketing karla
+sudo usermod -aG Marketing alejandra
+
+#Crear también tres carpetas con archivos: FileDev, FileOps y FileMark, asignar permisos para cada grupo de tal manera, que:
+
+#FileDev, acceso total para Desarrollo y sólo lectura para Operaciones y Marketing
+
+
+
+#FileOps, lectura y escritura para Operaciones, y solo lectura para Desarrollo y Marketing
+#FileMark, acceso total para Marketing, y lectura y ejecución para el resto.
+
+
