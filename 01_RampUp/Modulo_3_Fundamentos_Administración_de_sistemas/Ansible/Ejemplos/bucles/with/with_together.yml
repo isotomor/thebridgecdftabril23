@@ -1,0 +1,33 @@
+# para iterar dos listas paralelas
+---
+- name: Instalar e iniciar Apache Play
+  hosts: nodo1
+  vars:
+    list_one: [ 0,1,2 ]
+    list_two:
+      - A
+      - B
+      - C
+  tasks:
+    - name: with_together
+      ansible.builtin.debug:
+        msg: "{{ item.0 }} - {{ item.1 }}"
+      with_together:
+        - "{{ list_one }}"
+        - "{{ list_two }}"
+
+    - name: with_together -> loop
+      ansible.builtin.debug:
+        msg: "{{ item.0 }} - {{ item.1 }}"
+      loop: "{{ list_one|zip(list_two)|list }}"
+
+
+    - name: with_together -> loop
+      ansible.builtin.debug:
+        msg: "{{ item.0 }} - {{ item.1 }} - {{ item.2 }}"
+      loop: "{{ data[0]|zip(*data[1:])|list }}"
+      vars:
+        data:
+          - ['a', 'b', 'c']
+          - ['d', 'e', 'f']
+          - ['g', 'h', 'i']

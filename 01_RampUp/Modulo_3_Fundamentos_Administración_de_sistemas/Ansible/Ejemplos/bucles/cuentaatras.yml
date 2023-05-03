@@ -1,0 +1,14 @@
+---
+- name: cuentaatras
+  hosts: nodo1
+  tasks:
+  - name: cuenta atras 10 segundos
+    debug:
+      msg: "quedan {{ 10 - item }} segundos ..."
+    loop: "{{ range(10) | list }}"
+    loop_control: 
+      pause: 1
+
+  - name: Muestra
+    debug:
+      msg: "¡Sorpresa!"

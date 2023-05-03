@@ -1,0 +1,17 @@
+---
+- name: multiples usuarios
+  hosts: proxy
+  vars:
+    dbusers:
+      - username: juan
+        pass: pass1
+      - username: david
+        pass: pass2
+      - username: maria
+        pass: pass3
+  tasks: 
+    - name: añade usuarios
+      user:
+        name: "{{ item.username }}"
+        password: "{{ item.pass | password_hash('sha512') }}"
+      loop: "{{ dbusers }}"

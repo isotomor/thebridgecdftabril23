@@ -1,0 +1,21 @@
+---
+- name: Instalar e iniciar Apache Play
+  hosts: nodo1
+  vars:
+    dictionary:
+      key_name: value_name
+  tasks:
+    - name: with_dict
+      ansible.builtin.debug:
+        msg: "{{ item.key }} - {{ item.value }}"
+      with_dict: "{{ dictionary }}"
+
+    - name: with_dict -> loop (option 1)
+      ansible.builtin.debug:
+        msg: "{{ item.key }} - {{ item.value }}"
+      loop: "{{ dictionary|dict2items }}"
+
+    - name: with_dict -> loop (option 2)
+      ansible.builtin.debug:
+        msg: "{{ item.0 }} - {{ item.1 }}"
+      loop: "{{ dictionary|dictsort }}"

@@ -1,0 +1,9 @@
+---
+- name: precedencia de variables
+  hosts: nodo1
+  vars:
+    distribucion: "Ubuntu"
+  tasks:
+    - name: muestra el valor de distribucion
+      debug:
+        msg: La distribucion es {{ distribucion }}

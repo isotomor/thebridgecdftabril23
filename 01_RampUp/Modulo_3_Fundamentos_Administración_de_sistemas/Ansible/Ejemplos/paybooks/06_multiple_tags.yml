@@ -1,0 +1,25 @@
+---
+- name: primera jugada
+  hosts: all
+  tags: primera
+  tasks:
+    - name: instala tmux
+      package:
+        name: tmux
+        state: present
+    
+    - name: crea un fichero
+      archive:
+        path: /var/log
+        dest: /tmp/logs.tar.gz
+        format: gz
+
+- name: segunda jugada
+  hosts: nodo2
+  tags: segunda
+  tasks:
+    - name: instala git
+      apt:
+        name: git
+        state: present
+      tags: git

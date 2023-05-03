@@ -1,0 +1,11 @@
+---
+- name: saludo
+  hosts: nodo1
+  vars_prompt:
+    - name: nombre
+      prompt: ¿Cuál es su nombre?
+      private: no
+  tasks:
+    - name: saludamos al usuario
+      debug:
+        msg: Hola {{nombre }}

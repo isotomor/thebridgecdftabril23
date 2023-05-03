@@ -1,0 +1,13 @@
+---
+- name: Ejemplo creación de grupos
+  hosts: nodo2
+  tasks:
+    - name: crear grupo desarrollo
+      group:
+        name: desarrollo
+    - name: crear grupo seguridad
+      group:
+        name: seguridad
+    - name: crear grupo seguimiento
+      group:
+        name: seguimiento

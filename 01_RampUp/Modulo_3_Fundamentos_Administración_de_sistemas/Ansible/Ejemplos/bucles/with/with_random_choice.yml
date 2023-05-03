@@ -1,0 +1,15 @@
+---
+- name: Instalar e iniciar Apache Play
+  hosts: nodo1
+  vars:
+    my_list: [1,2,3]
+  tasks:
+    - name: with_random_choice
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      with_random_choice: "{{ my_list }}"
+
+    - name: with_random_choice -> loop (no hace falta bucle)
+      ansible.builtin.debug:
+        msg: "{{ my_list|random }}"
+      tags: random

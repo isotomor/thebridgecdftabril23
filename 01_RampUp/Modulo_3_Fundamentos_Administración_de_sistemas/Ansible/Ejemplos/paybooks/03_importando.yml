@@ -1,0 +1,13 @@
+---
+- name: primera jugada
+  hosts: all
+  tasks: 
+    - name: crear un nuevo archivo
+      file:
+        path: /tmp/otro.conf
+        mode: 664
+        owner: otrou
+        state: touch
+    
+    - name: crear grupos
+      import_tasks: 02_grupos.yml

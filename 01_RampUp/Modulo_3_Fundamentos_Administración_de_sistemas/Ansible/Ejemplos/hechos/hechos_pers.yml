@@ -1,0 +1,15 @@
+---
+- name: Añadir los hechos personalizados a nodo1
+  hosts: nodo1
+  tasks:
+    - name: crear el directorio facts.d
+      file:
+        path: /etc/ansible/facts.d
+        owner: otrou # Poner el usuario de vuestra máquina.
+        mode: 775
+        state: directory
+
+    - name: copiar hechos.fact al directorio facts.d
+      copy:
+        src: hechos.fact
+        dest: /etc/ansible/facts.d

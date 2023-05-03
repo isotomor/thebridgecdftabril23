@@ -1,0 +1,11 @@
+---
+- name: Lanza el primer playbook
+  include: playbook.yml
+  
+- name: Reutilizando playbooks
+  hosts: all
+  tasks:
+    - name: Reiniciando servidores
+      reboot:
+         msg: Servidor reiniciandose...
+

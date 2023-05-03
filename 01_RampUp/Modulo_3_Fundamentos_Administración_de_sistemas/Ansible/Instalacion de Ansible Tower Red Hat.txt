@@ -1,0 +1,100 @@
+Instalacion de Ansible tower en Centos
+
+Primero vemos qué versión de Centos 7 tenemos
+
+cat /etc/centos-release
+
+Tiene que ser superior a 7.7 para poder instalar, como la que tenemos es la 7.9, podemos seguir.
+También como mínimo 2 nucleos y 4Gb de RAM
+
+
+sudo yum update
+
+sudo yum install epel-release -y
+
+sudo yum install dnf -y
+
+sudo dnf install python3
+
+sudo yum install ansible
+
+sudo yum install vim curl
+
+# No es necesario instalar previamente postgresql porque lo hace ya el propio instalador,
+# pero si se hace, hay que cerciorarse de que está correcto
+
+# Install the repository RPM:
+sudo yum install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+# Install PostgreSQL:
+sudo yum install -y postgresql10-server
+
+# Optionally initialize the database and enable automatic start:
+sudo /usr/pgsql-10/bin/postgresql-10-setup initdb
+sudo systemctl enable postgresql-10
+sudo systemctl start postgresql-10
+
+# si hubiera instalaciones previas de postgresql
+yum list installed | grep postgres
+yum remove ....
+
+
+Para instalar el setup.sh, primero hay que cambiar los permisos de ejecucion del fichero.
+chmod 0777 setup.sh
+sudo ./setup.sh
+
+
+También hay que modificar el inventory que se encuentra en la misma carpeta: 
+
+kwrite inventory
+
+Debe quedar algo así (hasta que llegue los 300 comentarios con #):
+
+[tower]
+localhost ansible_connection=local
+
+[automationhub]
+
+[database]
+
+[all:vars]
+admin_password='abcd1234'
+
+pg_host=''
+pg_port=''
+
+pg_database='awx'
+pg_username='awx'
+pg_password='abcd1234'
+pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
+
+# Automation Hub Configuration
+#
+
+automationhub_admin_password='abcd1234'
+
+automationhub_pg_host=''
+automationhub_pg_port=''
+
+automationhub_pg_database='automationhub'
+automationhub_pg_username='automationhub'
+automationhub_pg_password='abcd1234'
+automationhub_pg_sslmode='prefer'
+
+
+Una vez instalado, para acceder, abrimos un navegador, escribimos 
+
+http://localhost/#/home
+
+y en la pantalla inicial de contraseña, escribimos como usuario: admin y como contraseña la que 
+hemos puesto en el inventario: abcd1234
+
+Luego nos pedirá una suscripción, seguir lo pasos, conseguir el manifest y
+aplicarlo en la ventana indicada
+
+Si lo queremos aplicar directamente en un playbook
+
+- name: Set the license using a file
+  tower_license:
+  manifest: "/tmp/my_manifest.zip"
+

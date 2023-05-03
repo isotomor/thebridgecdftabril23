@@ -1,0 +1,7 @@
+---
+- name: Ejemplo variables
+  hosts: all
+  vars:
+    color:
+      ubuntu: Amarillo
+      centos: Rojo

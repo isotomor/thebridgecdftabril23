@@ -1,0 +1,12 @@
+---
+- name: variables externas
+  hosts: nodo1
+  # Aquí incluimos variables externas
+  vars_files: incluir_variables_externas_listas_y_diccionarios.yml
+  tasks:
+    - name: Mostrar el segundo elemento de port_nums
+      debug:
+        msg: El puerto SSH es {{port_nums[1] }}
+    - name: Mostrar el uid de Juan
+      debug:
+        msg: El UIDde Juan es {{usuarios.juan.uid }}

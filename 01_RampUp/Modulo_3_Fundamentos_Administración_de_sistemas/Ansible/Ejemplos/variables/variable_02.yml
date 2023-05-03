@@ -1,0 +1,11 @@
+---
+- name: ejemplo variables
+  hosts: nodo1
+  vars:
+    color: amarillo
+  tasks:
+    - name: Mostrar el color favorito
+      debug:
+        msg: Mi color favorito es el {{ color }}.
+
+

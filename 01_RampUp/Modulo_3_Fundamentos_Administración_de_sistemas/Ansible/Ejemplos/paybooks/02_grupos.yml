@@ -1,0 +1,9 @@
+- name: crear grupo desarrollo
+  group:
+    name: desarrollo
+- name: crear grupo seguridad
+  group:
+    name: seguridad
+- name: crear grupo seguimiento
+  group:
+    name: seguimiento

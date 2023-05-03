@@ -1,0 +1,8 @@
+# El nodo 1 tiene que tener en /etc/hosts los nodos que tengamos en el inventario de la máquina control.
+---
+- name: bucle sobre inventario
+  hosts: nodo1
+  tasks:
+    - name: Ping todos los hosts
+      command: ping -c 1 "{{ item }}"
+      loop: "{{ groups['all'] }}"

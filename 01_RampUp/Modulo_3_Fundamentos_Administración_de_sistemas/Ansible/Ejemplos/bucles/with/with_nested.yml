@@ -1,0 +1,23 @@
+# Hace bucles por listas dobles que nos interesa ciclar en forma de producto cartesiano todos con todos.
+
+---
+- name: Instalar e iniciar Apache Play
+  hosts: nodo1
+  vars:
+    list_one: [0,1,2]
+    list_two:
+      - A
+      - B
+      - C
+  tasks:
+    - name: with_nested
+      debug:
+        msg: "{{ item.0 }} - {{ item.1 }}"
+      with_nested:
+        - "{{ list_one }}"
+        - "{{ list_two }}"
+
+    - name: with_nested -> loop
+      debug:
+        msg: "{{ item.0 }} - {{ item.1 }}"
+      loop: "{{ list_one|product(list_two)|list }}"

@@ -1,0 +1,22 @@
+--
+- name: Instalar e iniciar Apache Play
+  hosts: nodo1
+  tasks:
+    - name: Instala e inicia Apache
+      block:
+         - name: Instalar http
+           apt:
+             name: net-tools
+             state: latest
+
+         - name: Iniciar y habilitar net-tools
+           service:
+             name: net-tools
+             state: started
+             enabled: yes
+
+    - name: Esta tarea está fuera del bloque
+      debug:
+        msg: "Estoy fuera ..."
+
+

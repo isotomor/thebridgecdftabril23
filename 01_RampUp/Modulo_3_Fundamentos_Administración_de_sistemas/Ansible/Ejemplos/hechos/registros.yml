@@ -1,0 +1,15 @@
+--- 
+- name: Registros
+  hosts: nodo1
+  tasks:
+    - name: Lanza un comando con command
+      command: uptime
+      register: mi_uptime
+
+    - name: Podemos mostrar la variable server_uptime
+      debug:
+        var: mi_uptime
+
+    - name: O mostrar una parte
+      debug:
+        msg: "{{ mi_uptime.stdout }}"

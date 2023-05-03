@@ -1,0 +1,30 @@
+---
+- name: Verifica una instalacion de Apache
+  hosts: nodo1
+  vars:
+    http_port: 80
+    max_clients: 200
+    remote_user: root
+  tasks:
+  - name: Nos aseguramos que Apache tenga la última version
+    apt:
+      name: apache2
+      state: latest
+
+  - name: Escribe el config file de Apache
+    template:
+      src: /srv/apache2.j2
+      dest: /etc/apache2.conf
+    notify:
+    - Reinicia apache
+
+  - name: Comprobamos que el servicio está funcionando
+    service:
+      name: apache2
+      state: started
+
+  handlers:
+    - name: Reinicia apache
+      service:
+        name: apache2
+        state: restarted
