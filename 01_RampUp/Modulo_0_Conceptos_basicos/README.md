@@ -42,4 +42,4 @@ Puede encontrar más información aquí: [https://www.markdownguide.org/](https:
 
 ![img_4.png](img/Yaml_logo.png)
 
-Todo lo relacionado con YAML lo veremos en el siguiente documento [README](yaml/README.md)
+Todo lo relacionado con YAML lo veremos en el siguiente documento [README](Yaml/README.md)
