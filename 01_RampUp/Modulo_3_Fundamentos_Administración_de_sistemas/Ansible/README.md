@@ -777,7 +777,7 @@ Un playbook puede contener múltiples jugadas y cada jugada, a su vez, puede con
 
 “Cada jugada” es equivalente a “cada reproducción”
 
-Se acompaña un fichero llamado 01_multiple.yml
+Se acompaña un fichero llamado [01_multiple.yml](Ejemplos/playbooks/01_multiple.yml)
 
 ````bash
 ansible-playbook --check 01_multiple.yml -K
@@ -849,9 +849,10 @@ play#2 (nodo2): segunda jugada   TAGS: []
 
 Los Playbooks de Ansible tendrían poco recorrido si no se pudiesen reutilizar como partes de otros playbooks´.
 
-Así, si tenemos el caso en que varios playbooks comparten una lista común de tareas, podemos crear un archivo yml que contenga esa lista tareas comunes y luego reutilizarlas en otros playbooks
+Así, si tenemos el caso en que varios playbooks comparten una lista común de tareas, podemos crear un archivo yml que 
+contenga esa lista tareas comunes y luego reutilizarlas en otros playbooks
 
-Se acompaña un fichero llamado **02_grupos.yml** y otro **03_importando.yml**
+Se acompaña un fichero llamado [02_grupos.yml](Ejemplos/playbooks/02_grupos.yml) y otro [03_importando.yml](Ejemplos/playbooks/03_importando.yml)
 
 En esos ejemplos se utiliza **import_task** para indicar de dónde se van a sacar las tareas a utilizar.
 
@@ -859,13 +860,16 @@ También se puede usar import_playbook o include para reutilizar un playbook com
 
 Sólo hay un inconveniente: *Qué SOLO se puede usar un nivel de anidamiento.*
 
-La única diferencia es que las declaraciones de **importación** se **procesan previamente** en el momento en que se analizan los libros de jugadas. Por otro lado, las declaraciones de inclusión se procesan a medida que se encuentran durante la ejecución del libro de jugadas. 
+La única diferencia es que las declaraciones de **importación** se **procesan previamente** en el momento en que se 
+analizan los libros de jugadas. Por otro lado, las declaraciones de inclusión se procesan a medida que se encuentran 
+durante la ejecución del libro de jugadas. 
 
 En resumen, la importación es estática mientras que la inclusión es dinámica.
 
 Otra forma de reutilización es el uso de **etiquetas** (**Tags**)
 - Con éstas. *se puede optar por no ejecutar un playbook completo* y, en su lugar, *se puede ejecutar tareas o jugadas específicas.*
-- Basta con añadir las claves “tags” que se precisen, con el valor que necesitemos. Esto “marca” las tareas, para que después con el flag --tags al ejecutar ansible-playbook se ejecute solo la tarea marcada:
+- Basta con añadir las claves “tags” que se precisen, con el valor que necesitemos. Esto “marca” las tareas, para que 
+después con el flag --tags al ejecutar ansible-playbook se ejecute solo la tarea marcada:
 
 ````bash
 ansible-playbook 06_multiple_tags.yml --tags git
@@ -884,7 +888,7 @@ Para este segundo lab vamos a pedir lo siguiente:
 
 - Como ayuda, se adjuntan las instrucciones que habría que ejecutar en Ubuntu 18.04 si lo hiciéramos paso a paso desde el terminal.
 
-- El fichero se llama PasosPHP.txt
+- El fichero se llama [PasosPHP.txt](/Ejercicios/lab2/PasosPHP.txt)
 
 - Convertir a un playbook de varias tareas. Ayuda:
   - [https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html#plugins-in- ansible-builtin](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html#plugins-in-ansible-builtin)

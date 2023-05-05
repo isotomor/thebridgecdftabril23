@@ -11,4 +11,4 @@ usuarios:
   ana:
     username: ana
     uid: 2233
-    shell: /bin/sh
+    shell: /bin/sh21,23
