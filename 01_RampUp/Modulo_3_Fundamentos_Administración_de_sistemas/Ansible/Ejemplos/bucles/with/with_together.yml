@@ -4,10 +4,11 @@
   hosts: nodo1
   vars:
     list_one: [ 0,1,2 ]
-    list_two:
-      - A
-      - B
-      - C
+    data:
+      - list_two:
+        - A
+        - B
+        - C
   tasks:
     - name: with_together
       ansible.builtin.debug:
