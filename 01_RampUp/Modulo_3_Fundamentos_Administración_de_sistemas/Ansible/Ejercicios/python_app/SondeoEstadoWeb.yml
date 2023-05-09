@@ -1,0 +1,31 @@
+- name: Iniciar la aplicación Flask
+  hosts: nodo1
+  become: yes
+
+  tasks:
+  - name: Instalar Flask
+    pip:
+      name: flask
+      state: present
+
+  - name: Ejecutar la aplicación Flask
+    command: python3 flask_app/main.py
+    async: 20
+    poll: 0
+
+  - name: Esperar a que la aplicación esté lista
+    uri:
+      url: "http://127.0.0.1:5010/status"
+      return_content: yes
+    register: response
+    until: response.content | from_json | json_query('status') == "READY"
+    retries: 10
+    delay: 1
+
+  - name: Depurar respuesta
+    debug:
+      var: response.content
+
+  - name: Verificar que la aplicación está lista
+    debug:
+      msg: "La aplicación está lista."
