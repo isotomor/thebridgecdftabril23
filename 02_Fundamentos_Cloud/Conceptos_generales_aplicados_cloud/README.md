@@ -10,4 +10,4 @@ Infografícas:
 - [Historia de la nube 1](Infografías/Historia_de_la_nube_01.webp)
 - [Historia de la nube 2](Infografías/Historia_de_la_nube_02.webp)
 
-Puede consultar distintos escenarios [aquí](Conceptos generales aplicados a la cloud/Ejercicios/01_Conceptos_cloud_escenarios_respuestas.md) y las respuestas [aquí](Conceptos generales aplicados a la cloud/Ejercicios/01_Conceptos_cloud_escenarios_respuestas.md) 
+Puede consultar distintos escenarios [aquí](Ejercicios/01_Conceptos_cloud_escenarios_preguntas.md) y las respuestas [aquí](Ejercicios/01_Conceptos_cloud_escenarios_respuestas.md) 
