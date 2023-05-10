@@ -8,7 +8,7 @@ El contenido será el siguiente:
 
 ## Índice
 
-1. [Conceptos básicos en la nube](Conceptos%20generales%20aplicados%20a%20la%20cloud)
+1. [Conceptos básicos en la nube](Conceptos_generales_aplicados_cloud)
 2. [Módulo de AWS (Amazon Web Service)](Modulo_AWS)
 3. [Módulo de GCP (Google Cloud Platform)](Modulo_GCP)
 4. [Módulo de Azure](Modulo_Azure)
