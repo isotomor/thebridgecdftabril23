@@ -1,0 +1,66 @@
+---
+
+- name: Execute flask script
+  hosts: nodo0
+  vars:
+    path: /home/otrou/repos
+    main: /thebridgecloud/01_RampUp/Modulo_3_Fundamentos_Administración_de_sistemas/Ansible/Ejercicios/python_app/flask_app/main.py
+    server:  http://127.0.0.1:5010
+    endpoint: /status
+    repo: https://github.com/isotomor/thebridgecdftabril23.git
+  tasks:
+
+    - name: create repo folder
+      file:
+        path: "{{path}}/thebridgecloud"
+        state: directory
+
+    - name: GIT repository clone
+      git:
+        repo: "{{repo}}"
+        dest: "{{path}}/thebridgecloud"
+        accept_hostkey: true
+
+    - name: Install pip
+      apt:
+        name: python3-pip
+        state: latest
+      become: True
+
+    - name: install Flask
+      shell: pip3 install flask==2.3.2
+
+    #- name: insall Flask
+      #pip:
+      #requirements: "{{path}}/thebridgecloud/01_RampUp/Modulo_3_Fundamentos_Administración_de_sistemas/Ansible/Ejercicios/python_app/requirements.txt" 
+
+    - name: execute script
+      command: python3 "{{path}}{{main}}"
+      async: 20
+      poll: 0
+
+    - name: get status
+      uri:
+        url: "{{server}}{{endpoint}}"
+      register: response
+      until: response.json.status == "READY"
+      retries: 5
+      delay: 2
+
+    - name: debug response
+      debug:
+        var: response.json.status
+
+    - name: status message to slack
+      community.general.slack:
+        token: ******/******/******
+        msg: |
+            ### StatusUpdate ###
+            ---------------------------------
+            `Server`: {{server}}
+            `Status`: {{response.json.status}}
+            ---------------------------------
+        channel: #ansible-notifications
+        color: good
+        icon_url: ''
+...
