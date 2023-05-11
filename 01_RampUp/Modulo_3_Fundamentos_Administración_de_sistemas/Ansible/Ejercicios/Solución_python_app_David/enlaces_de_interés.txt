@@ -1,0 +1,3 @@
+- Guía para crear la app en slack y obtener la webhook URL: https://www.middlewareinventory.com/blog/ansible-slack-notification/
+
+- Documentación ansible slack: https://docs.ansible.com/ansible/latest/collections/community/general/slack_module.html
