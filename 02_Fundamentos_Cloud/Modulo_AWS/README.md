@@ -46,7 +46,7 @@ Consulte la documentación del módulo [aquí](https://docs.google.com/presentat
 
 Podéis consultar una lista de los 25 mejores servicios de AWS [aquí](https://docs.google.com/document/d/1wm6LOpLxi_PATKMMWzFgisQUuQ1NXeJT/edit?usp=share_link&ouid=102384283797243178688&rtpof=true&sd=true)
 
-Podéis consultar un manual de aws cli [aquí](Modulo_02_AWS/Manual%20aws-cli-v2.pdf)
+Podéis consultar un manual de aws cli [aquí](01_Conceptos_generales/AWS_manual_cli_v2.pdf)
 
 Cheat sheet AWS con los comandos más usados de CLI [pinche aquí](https://devhints.io/awscli)
 
