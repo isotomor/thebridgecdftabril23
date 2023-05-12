@@ -1,0 +1,8 @@
+Lanzar un grupo de autoescalado a partir de una plantilla de lanzamiento:
+https://docs.aws.amazon.com/es_es/autoscaling/ec2/userguide/create-asg-launch-template.html
+
+Lanzar una plantilla de lanzamiento:
+https://docs.aws.amazon.com/es_es/autoscaling/ec2/userguide/create-launch-template.html
+
+
+
