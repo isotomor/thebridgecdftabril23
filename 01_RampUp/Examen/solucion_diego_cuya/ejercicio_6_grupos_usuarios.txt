@@ -1,0 +1,39 @@
+-Primero creamos los grupos desarrollo, operaciones y marketing.
+sudo groupadd desarrollo
+sudo groupadd operaciones
+sudo groupadd marketing
+
+-Despues creamos a los 4 usuarios
+sudo useradd -s /bin/bash -d /home/Marcos/ -m -G sudo Marcos
+sudo useradd -s /bin/bash -d /home/Rocio/ -m -G sudo Rocio
+sudo useradd -s /bin/bash -d /home/Manolo/ -m -G sudo Manolo
+sudo useradd -s /bin/bash -d /home/Pepa/ -m -G sudo Pepa
+
+-Vamos a asignarlos a los grupos.
+sudo usermod -a -G desarrollo Marcos
+sudo usermod -a -G operaciones Rocio
+sudo usermod -a -G marketinggrupo_secreto Manolo
+sudo usermod -a -G desarrollo Pepa
+
+-Creamos las carpetas
+mkdir /carp1/FileDev /carp1/FileOps /carp1/FileMark
+mkdir /carp2/FileDev /carp2/FileOps /carp2/FileMark
+mkdir /carp3/FileDev /carp3/FileOps /carp3/FileMark
+
+-Asignamos las carpetas para lo distintos grupos-
+sudo chown :desarrollo /carp1/FileDev /carp1/FileOps /carp1/FileMark
+sudo chown :operaciones /carp2/FileDev /carp2/FileOps /carp2/FileMark
+sudo chown :marketing /carp3/FileDev /carp3/FileOps /carp3/FileMark
+
+-Damos permisos: Primero se lo doy a FileDev luego a FileOps y luego FileMark
+sudo chmod 770 /carp1/FileDev
+sudo chmod 740 /carp2/FileDev
+sudo chmod 740 /carp3/FileDev
+
+sudo chmod 740 /carp1/FileOps
+sudo chmod 760 /carp2/FileOps
+sudo chmod 740 /carp3/FileOps
+
+sudo chmod 750 /carp1/FileMark
+sudo chmod 750 /carp2/FileMark
+sudo chmod 770 /carp3/FileMark

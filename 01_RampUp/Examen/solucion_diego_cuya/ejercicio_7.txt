@@ -1,0 +1,67 @@
+1- Segun la pagina que he encontrado, es posible hacerlo.
+2- En este caso usaremos PostgreSql, bash ya que es donde queremos hacerlo y cronjobs, que es una utilidad que tiene linux para establecer un comando en el servidor para que se ejecuten tareas a una hora determinada por el operador
+3 -Primero creamos un usario en postgres y iniciamos sesion en linux con este usuario.
+
+Nos vamos con cd a la carpeta donde queramos generar los backups
+
+Con ls no aseguramos que estamso en la carpeta de postgress, deberia salir algo asi.
+
+# 9.4
+# Es decir debe de haber por lo menos una carpeta con la versión de postgres, es donde se encuentra la carpeta main, en donde están distintos archivos de configuración, pero no nos preocupemos por ello ahora.
+
+Creamos la carpeta cron con un mkdir, con cd nos metemos en la carpeta y con touch creamos un fichero backup.sh y le damos permisos de ejecucion ( yo suelo hacerlo con chmod a+x nombre de carpeta)
+
+Ahora colocamos este script, que la verdad esta tarde observare con ams detenimiento.
+
+#!/bin/bash
+# vars
+backups_path="/var/lib/postgresql/cron/backups"
+database="my_database_name"
+current_date_time="`date +%Y%m%d%H%M%S`";
+# dump
+pg_dump $database > $backups_path/$current_date_time.sql;
+# get size of dump
+size="`wc -c $backups_path/$current_date_time.sql`";
+# get oldest backup
+first_backup="`ls $backups_path | sort -n | head -1`"
+echo 'first backup '$first_backup
+# get size of oldest backup
+size_first="`wc -c $backups_path/$first_backup`"
+echo 'size_first '$size_first
+# get backups count
+backups_count="`find  $backups_path/*.sql -type f | wc -l`"
+echo 'backups_count '$backups_count
+# printing subject for email
+echo 'Subject:'$size >  $backups_path/$current_date_time.txt
+# condition for remove if there is more than 4 backups
+if [ $backups_count -ge 5 ] ; then
+ echo 'Greather than 5'
+# removing backup
+ rm $backups_path/$first_backup
+ first_text="`ls $backups_path | sort -n | head -1`"
+# removing text of backup
+ rm $backups_path/$first_text
+# printing body explaining removed backup
+ printf "\nArchivo borrado: "$first_backup >>  $backups_path/$current_date_time.txt
+ printf "\nPeso: "$size_first >>  $backups_path/$current_date_time.txt
+fi
+# sending email
+curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd --mail-from 'senderemail@example.com' --mail-rcpt 'receiveremail@example.com' --upload-file $backups_path/$current_date_time.txt --user 'senderemail@example.com:myawesomepassword555sincorriente' --insecure
+
+Luego para ejecutar como siempre ./backup.sh par ver si hay error, un pequeño testeo.
+
+Y finalmente ejecutamos el comando crontab -E
+
+Lo cuál abrirá un archivo en donde dejaremos todas las tareas cronológicas.
+
+*Importante usar rutas absolutas. 
+
+Despues de leer el manual de como añadir las datos para programar la tares añadiriamos un archivo como este
+
+30 2 * * * /var/lib/postgresql/cron/backup.sh
+
+Este por ejemplo nos dice que la tarea se ejecute todos los dias a las 2:30am
+
+Se guarda con ctrl+X y listo. O ya deberia, de todas meneras lo probare :).
+
+pdt: En este caso esta forma que encontre no solo hace el backup sino que tb nos borra el backup mas antiguo en caso de que haya 4 y nos manda un correo para que se nos avise.
