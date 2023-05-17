@@ -1,0 +1,6 @@
+flask
+dash
+dash-html-components
+dash-core-components
+boto3
+prettytable

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Usuarios</title>
+</head>
+<body>
+    <div class="content">
+        <h1>Listado de usuarios</h1>
+        {% if tasks|length < 1 %}
+        <h4>There are no tasks. Create one below.</h4>
+        {% else %}
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Fecha</th>
+            </tr>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.nombre }}</td>
+                    <td>{{ task.correo }}</td>
+                    <td>{{ task.fecha }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="/nuevo_usuario/">Insertar nuevo usuario</a>
+        {% endif %}
+    </div>
+</body>
+</html>
+

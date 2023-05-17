@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Usuarios</title>
+</head>
+<body>
+    <h2>Introduzca sus datos para registrarse como usuario.</h2>
+    <form  action='/' method="POST">
+        <label for="nombre">Nombre y apellido:</label><br>
+        <input type="text" name="nombre"><br>
+        <label for="correo">Correo:</label><br>
+        <input type="text" name="correo"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+
