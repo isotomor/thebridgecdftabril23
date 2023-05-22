@@ -105,7 +105,7 @@ Comprobamos
 sudo /etc/init.d/docker status
 
 
-sudo /etc/init.d/docker star
+sudo /etc/init.d/docker start
 ```
 
 Vamos a descargar Docker Desktop o bien Docker Toolbox, según la versión de Windows que tengamos.
