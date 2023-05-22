@@ -1,0 +1,56 @@
+version: '3.4'
+services:
+  app1:
+    restart: "no" # always  //  on-failure  //  unless-stopped
+    build:
+      context: ./app1
+      dockerfile: enlugardelamancha  
+    # esto lo que provoca es que la imagen creada a partir
+    # del dockerfile se llame nahuic/nuevaapp1:1.0
+    image: nahuic/nuevaapp1:1.0
+    networks:
+      - desarrollo
+      - produccion
+    ports:
+      - "5005:5000"
+      - "5000"  # esto escogería un puerto libre a partir 32765
+      - "5000-5004:5000" # rango de puertos
+      - "198.124.78.2:5010-5020:5000"  # ip + puertos
+    #ports:
+    #  - target: 5000
+    #    published: 5005
+    #    protocol: tcp
+    depends_on:
+      - app2
+  app2:
+    build:
+      context: ./app2
+      dockerfile: Dockerfile.txt
+      networks:
+        - desarrollo
+        - equipo1
+    # parte volumes montaje
+    # sudo docker run ........   -v mivolumen:/app/data
+    networks:
+      - equipo1
+    volumes:
+      - mivolumen:/app/data
+      - otrovolumen:/app/informes
+
+networks:
+  desarrollo:
+    external:
+      name: dev1
+  produccion:
+  equipo1:
+
+# parte volumes definicion   
+volumes:
+  mivolumen:
+    # si no ponemos external: true, crea el volumen
+    # sudo docker volume create mivolumen 
+    external: true
+  otrovolumen: 
+    # este lo va a crear cuando haga el docker-compose  
+
+

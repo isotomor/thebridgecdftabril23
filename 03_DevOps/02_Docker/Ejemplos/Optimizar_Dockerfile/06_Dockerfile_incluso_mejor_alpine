@@ -1,0 +1,8 @@
+# Es mejor buscar imágenes con sistemas muy pequeños. Si usas ubuntu por ejemplo de 500 megas tu imagen pesará eso.
+# alpine usa imagenes muy pequeñas.
+FROM node:7-alpine
+
+ADD . /app 
+RUN cd /app  && npm install 
+
+CMD npm start

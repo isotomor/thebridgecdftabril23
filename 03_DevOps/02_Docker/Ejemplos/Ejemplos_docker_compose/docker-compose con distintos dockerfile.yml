@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  app1:
+    build:
+      context: ./app1
+      dockerfile: enlugardelamancha
+    ports:
+      - "5005:5000"
+    depends_on:
+      - app2
+  app2:
+    build:
+      context: ./app2
+      dockerfile: Dockerfile.txt

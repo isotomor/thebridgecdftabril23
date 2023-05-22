@@ -1,0 +1,13 @@
+# Cuando hagamos referencia a un entrypoint, al usar CMD ["start"] haremos referencia a un comando en concreto del fichero
+# entrypoint.sh adjunto, "exec $CMD ${@:2}"
+# El fichero que se ajunta ya especifica que hacer en cada caso, si recibe start o dev por ejemplo.
+
+FROM node:7-alpine
+
+WORKDIR /app 
+ADD . /app 
+RUN npm install 
+
+# Estas dos líneas sería como hacer "./entrypoint.sh start"
+ENTRYPOINT ["./entrypoint.sh"] 
+CMD ["start"]

@@ -1,0 +1,9 @@
+# Es recomendable usar el WORKDIR para que la imagen sepa la dirección de donde está todo.
+
+FROM node:7-alpine
+
+WORKDIR /app 
+ADD . /app 
+RUN npm install 
+
+CMD ["npm", "start"]

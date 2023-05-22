@@ -1,0 +1,13 @@
+# En este fichero vemos que se utiliza mucho la función RUN, y es bueno reducir los RUN.
+# Cada vez que se crea un nuevo RUN se genera una nueva capa lo que añade más peso a la imagen final que sgeneremos.
+
+FROM ubuntu
+
+ADD . /app 
+
+RUN apt-get update 
+RUN apt-get upgrade -y 
+RUN apt-get install -y nodejs ssh mysql 
+RUN cd /app && npm install 
+
+CMD mysql & sshd & npm start

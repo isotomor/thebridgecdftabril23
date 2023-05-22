@@ -1,0 +1,8 @@
+Se ha probado el programa con las siguientes dependencias
+Python 3.7
+
+y los módulos:
+
+flask==1.1.2
+wtforms==2.3.3
+flask_wtf==0.14.3

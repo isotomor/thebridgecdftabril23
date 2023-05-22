@@ -1,0 +1,10 @@
+# Al igual que antes es importante buscar la imagen más adecuadara para que tengáis que tocar lo menos posible.
+FROM node
+
+ADD . /app
+
+# ya no se necesita instalar
+# node ni usar apt-get 
+RUN cd /app && npm install 
+
+CMD npm start

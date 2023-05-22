@@ -1,0 +1,14 @@
+# De esta forma reducimos el el run y agrupar por funcionalidades para hacer más reutilizable en otros dockerrun que creemos.
+
+FROM ubuntu
+
+ADD . /app 
+
+RUN apt-get update && apt-get upgrade -y
+  
+# deberíamos quitar ssh y mysql, y usar 
+# contenedor separado para la base de datos  
+RUN apt-get install -y nodejs # ssh mysql 
+RUN cd /app && npm install 
+
+CMD npm start

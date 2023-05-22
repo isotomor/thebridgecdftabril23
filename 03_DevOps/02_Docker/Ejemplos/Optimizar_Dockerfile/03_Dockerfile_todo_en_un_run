@@ -1,0 +1,12 @@
+# También podemos ejecutar todo en un único run aunque es mejor separar las instlacciones de las ejecuciones.
+
+FROM ubuntu
+
+ADD . /app 
+
+RUN apt-get update \ 
+    && apt-get install -y nodejs \ 
+    && cd /app \ 
+	&& npm install 
+	
+CMD npm start

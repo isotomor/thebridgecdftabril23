@@ -1,0 +1,7 @@
+FROM ubuntu:16.04 # ¡es así de fácil! 
+
+RUN apt-get update && apt-get install -y nodejs 
+ADD . /app 
+RUN cd /app && npm install 
+
+CMD npm start

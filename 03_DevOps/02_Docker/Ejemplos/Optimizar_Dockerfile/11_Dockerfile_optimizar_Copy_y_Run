@@ -1,0 +1,12 @@
+FROM node:7-alpine 
+
+WORKDIR /app 
+
+# De esta forma hacemos solo el copy de package.json, ejecutamos lo necesario y luego añadismos el resto de cotenido
+# Es una forma de optimizar.
+COPY package.json /app 
+RUN npm install 
+COPY . /app 
+
+ENTRYPOINT ["./entrypoint.sh"] 
+CMD ["start"]

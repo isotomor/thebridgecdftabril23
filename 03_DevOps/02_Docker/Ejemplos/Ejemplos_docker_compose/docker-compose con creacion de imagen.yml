@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+   app1:
+    build:
+      context: ./app1
+      dockerfile: enlugardelamancha
+    # esto lo que provoca es que la imagen creada a partir
+    # del dockerfile se llame nahuic/nuevaapp1:1.0
+    image: nahuic/nuevaapp1:1.0
+    ports:
+      - "5005:5000"
+    depends_on:
+      - app2
+   app2:
+    build:
+      context: ./app2
+      dockerfile: Dockerfile.txt

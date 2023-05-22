@@ -1,0 +1,11 @@
+# Es mejor utilizar copy que add.
+FROM node:7-alpine
+
+WORKDIR /app 
+
+# copia todo el contenido de la carpeta a esa dirección.
+COPY . /app 
+RUN npm install 
+
+ENTRYPOINT ["./entrypoint.sh"] 
+CMD ["start"]

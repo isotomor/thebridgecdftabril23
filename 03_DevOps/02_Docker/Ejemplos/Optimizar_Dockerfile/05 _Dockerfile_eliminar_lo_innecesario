@@ -1,0 +1,17 @@
+# Docker genera ficheros inecesarios en las imágenes, si sabemos que esto pasa es mejor limpiar estos ficheros para
+# que las imágenes sea menos pesadas.
+
+# También es bueno usar el tag por ejemplo en ubuntu para que no use otra versión. Si usa la última versión y no lo
+# tienes controlado puede dar lugar a error.
+
+FROM ubuntu:16.04
+ 
+RUN apt-get update \ 
+	&& apt-get install -y nodejs \ 
+    # líneas añadidas 
+    && rm -rf /var/lib/apt/lists/* 
+    
+ADD . /app 
+RUN cd /app && npm install
+
+CMD npm start
