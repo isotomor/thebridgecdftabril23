@@ -352,7 +352,7 @@ docker rmi -f id_imagen
 
 Podemos crear una imagen a partir de un contenedor. Usar esta capacidad con cuidado por lo costosa de la operación.
 
-- **docker commit -m "comentario" -a "autor" <idcontenedor><nombre:imagen>:<tag_imagen>**
+- **docker commit -m "comentario" -a "autor" <idcontenedor> <nombre:imagen>:<tag_imagen>**
 
 Por ejemplo si lanzamos redis y miramos el proceso con **docker ps**:
 
@@ -366,7 +366,7 @@ docker commit -m "imagenRedis" -a "TuNombre" c00d95b2db0c redis_imagen:v1
 
 ### Inspect
 
-Para mostrar información de un contenedor o una imagen de manera más profunda, utilizaremos dockerinspect
+Para mostrar información de un contenedor o una imagen de manera más profunda, utilizaremos docker inspect
 
 ````bash
 docker inspect c00d95b2db0c
@@ -399,7 +399,6 @@ También podemos exponer en un puerto disponible al azar:
 ```bash
 docker run -it --rm -p 8080 tomcat:8.0
 ```
-02. Introducción a Docker
 
 ## Construyendo imágenes
 ***
@@ -527,7 +526,7 @@ Hacemos el run y miramos su id de contenedor:
 docker run isotomor/python_flask:1.0
 ````
 
-Hacemos commit
+Si queremos volver a generar la imagen a partir del contenedor que acabamos de crear, tendríamos que hacer lo siguiente:
 ````bash
 docker commit <id_container> isotomor/pythonflask:1.0
 ````
@@ -570,7 +569,7 @@ RUN apt-get install -y \git \python \vim
 
 ### CMD
 Especifica qué comando se va a ejecutar cuando se inicie el contenedor.
-- Si no se especifica, dockerutilizará el predifinidoen la imagen base..
+- Si no se especifica, docker utilizará el predifinido en la imagen base..
 - Por ejemplo, vamos a poner que escriba un texto:
 
 ```dockerfile
@@ -579,7 +578,7 @@ CMD ["echo","Bienvenidos"]
 
 ### NO-CACHE
 
-Fuerza a que no se utilice la cache para recostruirimágenes a partir de capas antiguas. Va a ser más lento.
+Fuerza a que no se utilice la cache para recostruir imágenes a partir de capas antiguas. Va a ser más lento.
 
 `````bash
 docker build -t nacho/busybox . --no-cache=true
@@ -689,7 +688,7 @@ que es bastante pesada) vemos con **_docker images_** que nos ha creado la image
 Ahora hay que ejecutarlo, y como Flask suele trabajar sobre el puerto 5000, pues:
 
 ```bash
-docker run -d -p 5000 46f4e029a9e8
+docker run -d -p 5000:5000 dockerapp:1.0
 # Al poner el -d hacemos que se salga pero la app estará ejecutándose en segundo plano. 
 ```
 Nos devuelve un id largo.
@@ -750,12 +749,14 @@ Y ejecutamos el contenedor. Salvo que ahora añadiremos el link:
 ````bash
 docker run -d -p 5000:5000 --link redis docker_redis:v0.1
 ````
+Ahora que tenemos la app levantada, podremos ver que se nos está actualizando la bbdd de redis con el siguiente comando:
 
-```
-Kubernetes
-Vincular dos contenedores para que trabajen juntos
-```
-04 Dockerizandoapp web
+````bash
+docker exec -it redis redis-cli
+````
+
+Ahora podremos consultar las claves que se crean poniendo ``KEYS * ``
+
 
 
 # Exec y Volumenes
@@ -793,7 +794,7 @@ pero sabiendo que esto si lo admite cualquiera.
 La diferencia es ahora si Bashes parte del PATH o no. Si lo es, solo hay que escribir:
 
 ```bash
-docker exec -it bash_terminal bash
+docker exec -it nueva_app ../bin/sh
 ```
 
 A veces, estamos interesados en ejecutar un comando en un contenedor como root. Para ello utilizaremos -u con un 
