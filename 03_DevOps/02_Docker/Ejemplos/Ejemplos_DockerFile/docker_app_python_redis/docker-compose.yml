@@ -1,36 +1,17 @@
 version: "3.4"
 services:
-  dockerapp2:
+  dockerapp:
     build:
       context: .
+    ports:
+      - "8080:5000"
     depends_on:
       - redis
-  dockerapp:
-    # sudo docker build -t nahuic/app5:1.0 .
-    build:
-      # context indica la carpeta donde buscar los Dockerfiles
-      context: .
-      # dockerfile indica el nombre del Dockerfile si no se llama Dockerfile a secas
-      dockerfile: Dockerfile-pepito
-      
-    image: isotomor/app5:1.0
-    # sudo docker run ............   -p 5005:5000
+  dockerapp_imagen:
+    image: isotomor/app_redis:v1.0
     ports:
       - "5005:5000"
-      #- "5000"
-      #- "127.0.0.1:5010:5000"
-      #- "127.0.0.1:5015-5020:5000"
-
-    #ports:
-    #  - target:5005
-    #    published:5000
-    #    protocol:tcp
-    #    mode:host
-    # sudo docker run ........ --link redis
-    
-    
     depends_on:
       - redis
   redis:
-    # sudo docker pull redis:6.2.5-alpine3.14
     image: redis:6.2.5-alpine3.14
