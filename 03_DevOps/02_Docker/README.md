@@ -21,7 +21,7 @@
   - [Buenas prácticas Dockefile](#buenas-practicas-dockerfile)
 - [Contenedorizando aplicaciones Web](#contenedorizando-aplicaciones-web)
 - [Vincular contenedores](#vincular-contenedores)
-- [Exec y Volúmenes](#exec-y-volumenes)
+- [Exec y Volúmenes](#exec-y-volumenes)    
   - [Exec](#exec)
   - [Volúmenes](#volumenes-en-docker)
 - [Docker Composer](#docker-composer)
@@ -35,7 +35,7 @@
 
 Docker usa una arquitectura cliente-servidor donde el daemon funciona como servidor.
 - El Docker Daemon, que también se le denomina Docker Engineo Docker Server, es quien construye, ejecuta y distribuye 
-los contenedores.
+  los contenedores.
 - Este Daemon utiliza funciones específicas de Linux
 
 El usuario no interactúa directamente con el daemon sino a través del cliente docker. Este cliente es la interfaz de 
