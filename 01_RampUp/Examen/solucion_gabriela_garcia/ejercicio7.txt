@@ -1,0 +1,26 @@
+#Averiguar cómo podríamos hacer backups cada cierto tiempo. (Si se puede, especificar herramientas y comandos a ejecutar).
+###  informaciòn extraida de https://computernewage.com/2022/12/23/gnu-linux-scripting-bash-ejemplo-3/
+#!/bin/bash
+
+# Definición de la variable que almacena la ruta con el directorio del que quieres realizar el backup
+# Como ruta he elegido la carpeta Documentos dentro del directorio Home de mi usuario local
+directorio="/home/mi-usuario/Documentos";
+
+# Definición de la variable que almacena el nombre del fichero que contendrá el fichero comprimido con la copia de seguridad
+backup="backup-documentos-$(date +'%Y-%m-%d').tar.gz"
+
+# Definición de la variable que almacena la ruta de la unidad externa en la que almacenar el backup
+unidad="/dev/sdb1"
+
+# Realizar la copia de seguridad y comprimirla en un fichero .tar.gz.
+tar -czf $backup $directorio
+
+# Comprobar si la unidad externa está montada
+if mountpoint -q $unidad; then
+    # Copiar el fichero comprimido con la copia de seguridad en la unidad externa
+    cp $backup $unidad
+    # Borrar el fichero comprimido de la ubicación de origen
+    rm -rf $backup
+else
+    echo "Error"
+fi
