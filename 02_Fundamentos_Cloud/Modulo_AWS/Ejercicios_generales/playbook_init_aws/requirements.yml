@@ -1,0 +1,19 @@
+---
+- name: Copiar archivo a instancia remota
+  hosts: aws_test
+  gather_facts: false
+  vars:
+    user_path: $HOME
+    remote_path: /home/vinxu
+
+  tasks:
+
+    - name: Download requirements.txt file
+      fetch:
+        src: "{{remote_path}}/aws_ansible/requirements.txt"
+        dest: "{{user_path}}/init_requirements"
+        flat: yes
+        remote: yes
+        mode: 0644
+
+...
