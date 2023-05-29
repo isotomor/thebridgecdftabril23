@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pv-pod2
+spec:
+  containers:
+    - name: task-pv-container2
+      image: nginx
+      ports:
+        - containerPort: 80
+          name: "http-server"
+          
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"  # la ruta en el contenedor, donde si dejamos algo se mantiene con vida 
+          name: pv-storage2                    # !!!!! Tiene que coincidir con el mismo name de la parte volumes !!!!!
+  
+  volumes:
+    - name: pv-storage2         # !!!!! Tiene que coincidir con el mismo name de la parte volumeMounts !!!!!
+      persistentVolumeClaim:   # !!!!! Aquí se determina a que PVC está asociado este Pod  !!!!!
+        claimName: pv-claim2    # !!!!! Tiene que coincidir con el name del propio PVC (el que está debajo del metadata)
+        
+# sudo kubectl apply -f pod-pvc.yaml        

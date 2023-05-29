@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: contador
+spec:
+  containers:
+  - name: contador
+    image: busybox
+    # este contenedor va generando lineas
+    # que envía a los ficheros 1.log y 2.log
+    # que están en la ruta de montaje
+    command: ["/bin/sh","-c"]
+    args:
+    - >
+      i=0;
+      while true;
+      do
+        echo "$i: $(date)" >> /var/log/1.log;
+        echo "$(date) INFO $i" >> /var/log/2.log;
+        i=$((i+1));
+        sleep 1;
+      done
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+      
+  - name: contador-log-1
+    image: busybox
+    # este contenedor muestra el contenido del fichero 1.log
+    # que está en la ruta de montaje
+    command: ["/bin/sh","-c"]
+    args: ['tail -n+1 -f /var/log/1.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+      
+  - name: contador-log-2
+    image: busybox
+    # este contenedor muestra el contenido del fichero 1.log
+    # que está en la ruta de montaje
+    command: ["/bin/sh","-c"]
+    args: ['tail -n+1 -f /var/log/2.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  volumes:
+  - name: varlog
+    emptyDir: {}
+
+# Para meternos dentro de cada uno de los contenedores
+# kubectl exec -it contador --container contador-log-1 -- /bin/sh

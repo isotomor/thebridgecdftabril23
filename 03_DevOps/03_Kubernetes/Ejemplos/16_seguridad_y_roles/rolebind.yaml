@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: empleados-role-binding
+  namespace: empleados
+subjects:
+- kind: User
+  name: jose
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: empleados
+  apiGroup: ""

@@ -1,0 +1,35 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: letschat
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http-server
+  selector:
+    name: letschat
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: letschat
+  labels:
+    name: letschat
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: letschat
+  template:
+    metadata:
+      labels:
+        name: letschat
+    spec:
+      containers:
+      - name: letschat
+        image: sdelements/lets-chat
+        ports:
+          - name: http-server
+            containerPort: 8080

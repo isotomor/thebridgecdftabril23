@@ -1,0 +1,51 @@
+# En este último caso, vamos a usar el mismo deployment, pero añadiendole un servicio para la salida a internet.
+
+Me da error este código, me puedes decir porque
+
+apiVersion: v1
+kind: Service
+metadata:  
+  name: rss-site
+spec:
+  selector:    
+    app: web
+  type: NodePort
+  ports:  
+  - name: pnginx
+    port: 80  # el puerto interno por el que se ve el servicio
+    targetPort: 80 # debe coincidir con el containerPort del contenedor
+  - name: prss
+    port: 88  # el puerto interno por el que se ve el servicio
+    targetPort: 88 # debe coincidir con el containerPort del contenedor
+    nodePort: 30200 # puerto por el que se ve en el browser
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rss-site
+  labels:
+    app: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      name: rss-site
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: front-end
+          image: nginx
+          ports:
+            - containerPort: 80
+        - name: rss-reader
+          image: isotomor/rss
+          ports:
+            - containerPort: 88
+
+# kubectl create -f 03_servicio_y_deployment.yaml
+# kubectl get deployments
+# kubectl describe deployment rss-site

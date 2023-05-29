@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:  
+  name: formulario-python
+spec:
+  selector:    
+    app: formulario-python
+  type: NodePort
+  ports:  
+  - name: tomcat
+    port: 80  # el puerto interno por el que se ve el servicio
+    targetPort: 5000 # debe coincidir con el containerPort del contenedor
+    nodePort: 30060 # puerto por el que se ve en el browser
+    protocol: TCP
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: formulario-python
+  labels: 
+    app: formulario-python
+spec:
+  containers:
+  - name: formulario-python
+    image: isotomor/app_python_formulario
+    ports:
+    - containerPort: 5000

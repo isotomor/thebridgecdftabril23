@@ -1,0 +1,54 @@
+# Este código de Kubernetes se utiliza para crear dos objetos Pod con pruebas de salud para verificar que los
+# contenedores estén funcionando correctamente. Si los contenedores no responden a las sondas de salud, Kubernetes
+# intentará reiniciarlos para garantizar que los servicios se mantengan en funcionamiento.
+
+# El primer objeto Pod se llama pod-prueba y utiliza la imagen de Nginx. La prueba de salud se define utilizando una sonda
+# HTTP (httpGet) que consulta la ruta /status/healthz en el puerto 80. Si el contenedor no responde en 1 segundo,
+# Kubernetes lo considerará no saludable. Además, la sonda se iniciará 30 segundos después de que el contenedor se haya iniciado.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-prueba
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    # Define la prueba de salud
+    livenessProbe:
+      # prueba http
+      httpGet:
+        path: /_status/healthz
+        port: 80
+      # tiempo de espera a que el pod inicie antes de aplicar
+      # el healthcheck
+      initialDelaySeconds: 30
+      timeoutSeconds: 1
+    ports:
+    - containerPort: 80
+
+# El segundo objeto Pod se llama pod-tcp-socket-prueba y utiliza la imagen de Redis. La prueba de salud se define
+# utilizando una sonda TCP (tcpSocket) que verifica la disponibilidad del puerto 6379. Si el contenedor no responde
+# en 1 segundo, Kubernetes lo considerará no saludable. Además, la sonda se iniciará 30 segundos después de que el
+# contenedor se haya iniciado.
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-tcp-socket-prueba
+spec:
+  containers:
+  - name: redis
+    image: redis
+    # Define la prueba de salud
+    livenessProbe:
+      # prueba TCP
+      tcpSocket:
+        port: 6379
+      # tiempo de espera a que el pod inicie antes de aplicar
+      # el healthcheck
+      initialDelaySeconds: 30
+      timeoutSeconds: 1
+    ports:
+    - containerPort: 6379

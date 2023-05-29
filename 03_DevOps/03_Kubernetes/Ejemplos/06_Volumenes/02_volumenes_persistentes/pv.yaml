@@ -1,0 +1,16 @@
+# Este script crea un volumen persistente.
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: sistemaficheros   # esto es lo que identifica al PV para el PVC
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: "/mnt/data"

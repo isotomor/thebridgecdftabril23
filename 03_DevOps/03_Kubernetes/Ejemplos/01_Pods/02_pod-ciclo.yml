@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ciclo
+spec:
+  containers:
+  - name: ciclo-container
+    image: nginx
+    lifecycle:
+      postStart:
+        exec:
+          command: ["/bin/sh", "-c", "echo Hola desde kubernetes > /usr/share/message"]
+      preStop:
+        exec:
+          command: ["/usr/sbin/nginx","-s","quit"]
+
+# Podemos acceder al contenedor con kubectl exec -it ciclo sh
+# Una vez que hemos accedido, podemos entrar en la carpeta /usr/share/message y ver que se ha creado el archivo.

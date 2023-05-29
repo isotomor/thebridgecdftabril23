@@ -1,0 +1,19 @@
+# Este ejemplo crea dos contenedores dentro de un mismo pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multipod
+  labels:
+    environment: dev
+spec:
+  containers:
+    - name: server
+      image: nginx:1.13-alpine
+      ports:
+        - containerPort: 80
+          protocol: TCP
+    - name: side-car
+      image: alpine:latest
+      command: ["/usr/bin/tail", "-f", "/dev/null"]
+  restartPolicy: Never

@@ -1,0 +1,17 @@
+# Este ejemplo despliega un busybox.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-durmiente
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    args:
+    - sleep
+    - "20"
+
+# El busibox estaría desplegado, podremos acceder a el con el comendo
+# kubectl exec -it busybox-durmiente sh
+

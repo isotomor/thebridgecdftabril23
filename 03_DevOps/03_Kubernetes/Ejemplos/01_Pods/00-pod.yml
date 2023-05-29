@@ -1,0 +1,15 @@
+# Este pod crea una instancia de redis.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mipod
+  labels: 
+    ejemplo: depod
+      
+spec:
+  containers:
+  - name: redis
+    image: redis:6.0.9
+
+# kubectl apply -f "00 pod.yml"

@@ -1,0 +1,4 @@
+# escalar replicas de un deployment determinado
+
+
+kubectl scale deployments/mideplo --replicas=4

@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: becarios-role-binding
+  namespace: becarios
+subjects:
+- kind: User
+  name: jose
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: becarios
+  apiGroup: ""

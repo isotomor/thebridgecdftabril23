@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: <nombre_del_pod>
+  namespace: <nombre_del_namespace> 
+spec:
+  containers:
+  - name: <nombre_del_contenedor>
+    image: <usuario/nombre_imagen:version>

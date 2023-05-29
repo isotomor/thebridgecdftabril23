@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+    
+  rules:
+  - host: analiticas.miapp.com         #el nombre de dominio
+     http:
+      paths:
+      - path:/analiticas
+        backend:
+          serviceName: app-analiticas  #el nombre del servicio
+          servicePort: 3000   # este es el puerto interno
+      - path:/resultados
+        backend:
+          serviceName: app-resultados  #el nombre del servicio
+          servicePort: 3010   # este es el puerto interno
+  - host: compras.miapp.com         #el nombre de dominio
+     http:
+      paths:
+      - path:/compras
+        backend:
+          serviceName: app-compras  #el nombre del servicio
+          servicePort: 8000   # este es el puerto interno
+  tls:
+    - hosts:
+      - compras.miapp.com
+      secretName: ejemplo-tls 

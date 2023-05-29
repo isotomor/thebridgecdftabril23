@@ -1,0 +1,23 @@
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: hostname-service 
+spec:
+  # Expone el servicio en un puerto estático en cada nodo
+  # para que podamos acceder al servicio desde fuera del clúster
+  type: NodePort
+
+  # Cuando el nodo recibe una solicitud en el puerto estático (30163)
+  # "selecciona los  pods con la etiqueta 'app' y 'echo-hostname'"
+  # y reenviar la solicitud a uno de ellos
+  selector:
+    app: echo-hostname 
+
+  ports:
+    # Tres tipos de puertos para un servicio
+    # nodePort: un puerto estático asignado a cada nodo
+    # port: puerto expuesto internamente en el clúster
+    # targetPort: el puerto del contenedor al que enviar solicitudes
+    - nodePort: 30163
+      port: 8080 
+      targetPort: 80

@@ -1,0 +1,17 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cronos
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: micronos
+            image: busybox
+            command: ["/bin/sh", "-c"]
+            args:
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure

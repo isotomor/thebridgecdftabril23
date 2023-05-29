@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-deployment
+spec:
+  # El estado deseado de una réplica se define como
+
+  # 1. ¿Cuántas copias quiero?
+  replicas: 3
+
+  # 2. ¿Cómo quiero actualizar?
+  strategy:
+    type: Recreate
+
+  # 3. ¿Qué pods son controlados por este deployment?
+  selector:
+    # ¡Esto debe coincidir exactamente con el label del pod!
+    matchLabels:
+      app: example
+
+  # template indica la definición del pod, como si fuera un kind: Pod
+  # spec está los containers implicados en el pod.
+  template:
+    metadata:
+      # La etiqueta es utilizada por el selector del Deployment.
+      labels:
+        app: example
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+          - containerPort: 80

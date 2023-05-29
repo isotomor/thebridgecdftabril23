@@ -1,0 +1,18 @@
+# Este primero fichero crearía un Pod con rss-reader, el contenedor.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rss-site
+  labels:
+    app: web
+spec:
+  containers:
+  - name: front-end
+    image: nginx
+    ports:
+      - containerPort: 80
+  - name: rss-reader
+    image: isotomor/rss
+    ports:
+      - containerPort: 88

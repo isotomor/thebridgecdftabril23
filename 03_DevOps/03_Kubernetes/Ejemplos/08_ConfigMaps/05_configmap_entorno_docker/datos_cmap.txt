@@ -1,0 +1,4 @@
+clave1=100
+clave2=3.5
+clave3=nombre
+

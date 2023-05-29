@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:  
+  name: nodeport
+  namespace: miespacio
+spec:
+  selector:    
+    app: nodeport-web
+  type: NodePort
+  ports:  
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30036
+    protocol: TCP

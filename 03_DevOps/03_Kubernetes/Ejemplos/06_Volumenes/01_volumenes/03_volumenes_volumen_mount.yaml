@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volumenes
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    
+    volumeMounts:
+    - mountPath: /home
+      name: home
+    - mountPath: /temp
+      name: temp
+  
+  volumes:
+  - name: home
+    hostPath:
+      path: /home/usuario/datos
+  - name: temp
+    emptyDir: {}

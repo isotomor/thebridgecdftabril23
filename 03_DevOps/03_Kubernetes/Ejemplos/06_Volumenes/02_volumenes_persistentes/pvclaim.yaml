@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim  # este nombre se debe poner en el Pod o en Deployment
+  labels:
+    type: local
+spec:
+  storageClassName: sistemaficheros
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+

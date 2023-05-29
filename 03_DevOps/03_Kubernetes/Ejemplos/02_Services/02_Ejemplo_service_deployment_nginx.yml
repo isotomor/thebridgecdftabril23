@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostname-service
+spec:
+  # Expone el servicio en un puerto estático en cada nodo
+  # para que podamos acceder al servicio desde fuera del clúster
+  type: NodePort
+
+  # Cuando el nodo recibe una solicitud en el puerto estático (30163)
+  # "selecciona los  pods con la etiqueta 'app' y 'echo-hostname'"
+  # y reenviar la solicitud a uno de ellos
+  selector:
+    app: example
+
+  ports:
+    # Tres tipos de puertos para un servicio
+    # nodePort: un puerto estático asignado a cada nodo
+    # port: puerto expuesto internamente en el clúster
+    # targetPort: el puerto del contenedor al que enviar solicitudes
+    - nodePort: 30163
+      port: 8080
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: nginx-deployment
+spec:
+  # El estado deseado de una réplica se define como
+
+  # 1. ¿Cuántas copias quiero?
+  replicas: 3
+
+  # 2. ¿Cómo quiero actualizar?
+  strategy:
+    type: Recreate
+
+  # 3. ¿Qué pods son controlados por este deployment?
+  selector:
+    # ¡Esto debe coincidir exactamente con el label del pod!
+    matchLabels:
+      app: example
+
+  # template indica la definición del pod, como si fuera un kind: Pod
+  # spec está los containers implicados en el pod.
+  template:
+    metadata:
+      # La etiqueta es utilizada por el selector del Deployment.
+      labels:
+        app: example
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+          - containerPort: 80
+
+# Podemos comprobar que ha funcionado viendo los pods si están activos kubectl get all -o wide
+# Podemos comprobar la web curl http://192.168.49.2:30163
+

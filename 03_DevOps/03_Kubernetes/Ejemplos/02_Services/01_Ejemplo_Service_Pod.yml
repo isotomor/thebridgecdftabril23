@@ -1,0 +1,37 @@
+# En este ejemplo se crea un Service y un Pod a través de la imagen tomcat
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx-app
+  ports:
+    - protocol: TCP
+      port: 80 # el puerto interno por el que se ve el servicio
+      targetPort: 80 # debe coincidir con el containerPort del contenedor
+      nodePort: 30036 # puerto por el que se ve en el browser
+  type: LoadBalancer
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx-app
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+
+# Para ejecutar el servicio como siempre hacemos kubectl apply -f 01_Ejemplo_Service_Pod.yml
+
+# Para comprobar que funciona, podemos consultar la web generada, que será la IP del nodo más el puesto de salida.
+# En mi caso es curl http://192.168.49.2:30036
+
+# Para consultar la IP del nodo podemos hacerlo con kubectl get nodes -o wide o con minikube id.
