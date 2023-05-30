@@ -22,7 +22,12 @@ kubectl run nginx --image=nginx --namespace=miespacio
 kubectl get pods --namespace=miespacio
 ````
 
-Para configurar un namespace por defecto.
+Para cambiar el namespace:
+````bash
+kubectl config set-context --current --namespace="NOMBRE_NAME_SPACE"
+````
+
+Si queremos volver al namespace por defecto
 ````bash
 kubectl config set-context --current --namespace=""
 ````
