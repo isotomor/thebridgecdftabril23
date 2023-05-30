@@ -28,12 +28,6 @@ Información sobre un pod cualquiera.
 kubectl describe pods mipod
 ````
 
-Obtiene todos los pods en ejecución
-
-````bash
-kubectl get pods --selector=app=cassandra -o jsonpath='{.items[*].metadata.labels.version}'
-````
-
 Borrar un pod
 ````bash
 kubectl delete pods mipod
