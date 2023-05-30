@@ -675,6 +675,11 @@ creado y podremos usar esta web en nuestro navegador:
 minikube service formulario-python --url
 ````
 
+Si no te acuerdas del nombre del servicio, puedes usar este comando:
+````bash
+minikube service --all
+````
+
 
 # Un poco mas alla en Kubernetes
 
