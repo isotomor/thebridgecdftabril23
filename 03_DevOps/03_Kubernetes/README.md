@@ -1037,18 +1037,14 @@ En definitiva:
 - Un **PersistentVolumeClaim (PVC)** es una solicitud para que la plataforma cree un PV para nosotros, y nosotros 
 adjuntemos un PV a nuestros podsa través de un PVC.
 
-Existen una gran cantidad de volúmenes persistentes:
-
-![img_1.png](img/Volumentes_persistentes_02.png)
-
-Estos volúmenes persistentes además tienen varios tipos de acceso.
+Existen una gran cantidad de volúmenes persistentes, estos volúmenes persistentes además tienen varios tipos de acceso.
 - ReadWriteOnce
 - ReadOnlyMany
 - ReadWriteMany
 
 ![img_2.png](img/Volumentes_persistentes_03.png)
 
-Por último también existen varios tipos de estrategias cuando se decidereciclar un volumen persistente.
+Por último también existen varios tipos de estrategias cuando se decide reciclar un volumen persistente.
 
 - Retain
 - Recycle
