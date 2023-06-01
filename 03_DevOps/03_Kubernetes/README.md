@@ -34,7 +34,6 @@
 - [Helm](#helm)
   - [¿Cómo funciona?](#como-funciona)
   - [Sobre las versiones de Helm](#sobre-las-versiones-de-helm)
-  - [Helm hay que instalarlo para que funcione](#helm-hay-que-instalarlo-para-que-funcione)
   - [Estructura de un Chart de Helm](#estructura-de-un-chart-de-helm)
 - [Ingress](#ingress)
   - [Instalador de controlador Ingress](#instalador-de-un-controlador-ingress)
@@ -1459,7 +1458,7 @@ apiVersion: v1
 kind: Secret
 metadata: 
   name: mysecret 
-  type: Opaque
+type: Opaque
 data:
   username: YWRtaW4=
   password: MWYyZDFlMmU2N2Rm
@@ -1571,7 +1570,7 @@ Las referencias **secretKeyRef** a claves que no existan en un secreto con nombr
 ## Hands On: Ejemplos de Secretos
 
 Vamos a ver ahora, cómo modificar el código de la Aplicación Java para  que permita utilizar Config-Map y Secretos.
-Todos estos ejercicios los trabajaremos con los ficheros de la ruta [02_ejercicio_configmap_y_secretos](Ejericios/02_ejercicio_configmap_y_secrets)
+Todos estos ejercicios los trabajaremos con los ficheros de la ruta [02_ejercicio_configmap_y_secretos](Ejercicios/02_ejercicio_configmap_y_secrets)
 
 ### Parte 1. Planteamiento del problema:
 Tenemos que en el fichero Aplicacion.java, tanto la conexión como el usuario y la password están escritas directamente 
@@ -1580,7 +1579,7 @@ sobre el código. Esto no puede quedarse así.
 Para ello se va a crear una clase que proporcione unos métodos para acceder a un fichero config-map que contenga la 
 conexión y el usuario y otro método que acceda a un fichero de secrets para obtener la contraseña.
 
-Además se tendrá que modificar aspectos de los yaml que se tienen definidos en la carpeta [k8s](Ejericios/02_ejercicio_configmap_y_secrets/Con_ConfigMaps/k8s).
+Además se tendrá que modificar aspectos de los yaml que se tienen definidos en la carpeta [k8s](Ejercicios/02_ejercicio_configmap_y_secrets/Con_ConfigMaps/k8s).
 
 
 ### Parte 2. Crear los ficheros de datos posibles:
@@ -2791,4 +2790,4 @@ kubectl --context=josebecarios-context create deployment becnginx --image=nginx
 
 #### Ejercicio cuenta de usuario
 
-Ahora para practicar se deberá realizar el siguiente ejercicio [pinche aquí](Ejericios/cuentas_usuario_demo.md)
+Ahora para practicar se deberá realizar el siguiente ejercicio [pinche aquí](Ejercicios/cuentas_usuario_demo.md)
