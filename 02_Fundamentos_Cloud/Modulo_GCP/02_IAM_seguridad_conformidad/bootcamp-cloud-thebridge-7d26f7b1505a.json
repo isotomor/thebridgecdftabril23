@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bootcamp-cloud-thebridge",
+  "private_key_id": "7d26f7b1505a735a67a24adb60d7de67db2d6fbc",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5cMfYflfCay1w\nJ6UaaVG42wN4xZo7VBJ1zVsxRAbjTBQUi88MFCUlsqPjFXhpPJ6VnkRdHHpog43e\nNdOy9+ctJOJTjDXK/qRpkPw9Cek86+dv3NDxFfgN/4MZbuPcDkMhA4roQfniL5sf\nFy828qqsCcPX+HIaRX4utTaAn3wV5ev8heH61LcARu5afULIXNNaicenf/ECyuUe\nkDToj2QBSBIJiSCZadHKJ/g4oJqjVmL4bGHS3NWcx7WHYYREDtL9Nr3YqEvzhZC5\nM5YG3Gh6eoFoMl+jrApDEDOY+z8tOTBPWcawVlhi7y5KmpjlbjW2o3a+qAWjC1Gm\nBb1Dl8sDAgMBAAECggEABRMHpO5FddXQ9ydekTZzPLJhifB+TplNAq7ii+/nRa5T\nQ6yqYb47YKi0FgavC3zT1MGb7/Wo3oCbD+A73BiEhEEPdbx5zFrjd4Vhdu91KRbw\nzP18ijGmXrEF5AWbc+4VUCtJ+x5duXQWs+cX16e+8S44jwmxYElT2/CsKSDewwqX\nrv8VI0K/JTxeVHvvCJFv2UjMZ1Lw1IRr3lJIY4iv+vFNqa7vvRpHI2W2IU/AfyNA\nDCmXykwO25/RjGcm0PUeV+RxsJ9wHxRFALXpJ2ZRXMMixRpx+iEBQC8Lal0g4c7G\nshwDta4yX43KK1H4XUaAvfITzJwdmAdk3H05IOM0YQKBgQDctf+anx8hJOuGgZpB\naZvfpQi/jBf1mFHV7gnMMX5l1tfZHHMc7QpMtAalTDFulpexZkxDeTY59U4x7fM2\nwc3PPM9Qi/m+3ei6E0opjr2iPQaXwnda38/feAl6hqUSjdPmrMRY4/mQhiwFzqZK\nh6stj1dqKrfnGbJ1GSzGZ/eYHQKBgQDXFx30zJge5ndBqJlqLD93CDUJnLyosp8S\nOVqgOUq7yrUJfLP6uNZx0Fiu/qDIF6FO3voO8uRNSB2a+peGyK/joY11VOVC4BKk\n1LLphbWZ1UTGyDKuFLUL+sIRwb9YveXhxr214itJOvRmLzrGYn3Xvpdc5WnPJXiF\nNAtcxCrFnwKBgQCRV1RT6Rchx2NF9xCypK4dz1r8cG/SrhSt8QwIqEsZGyqW8XIo\niTwwGJkLvyoKLicEjl4ITMjVz+FHZe+0jllOcDgBTbwP4agA6PT8euAL923hABGD\nCUGlYjGzuvj3R+hTzk+aTb4pWwGgbV36VG74GJ2y7yCdkcF/9S0UFqDoTQKBgCH1\nYWJj5uSCCHQSVV5g7Ag0AIOq/lI4GUs8SOWhBf6OK3T6/kNoaVsAxO+j/eh5aptU\nMvCnQoo9B4ePZtr91l8/A2Fx7NxZGjhx6GlcFebauAgWVYIMfOUOSxOYnkg5exDh\nWtRbh/AA4dM8Q7BMnoewbJ9bDRCKXvPQ2rZjtkkLAoGAG2ClHApARHSBaIL2r5bf\nelWaEJtXJ+VtxI1CZW7Jc2IkRaoJBAdy5TpwyY+J20k3kZCayIz5TDF4C+EBDHGq\nAoei0lk+FWZxBjRERRW6u3p3LwZyz/8Z935qSQDKRX/eW2I4DO4Rquu2L6kK6mBX\ndgTrjSjfr7VnDmk8D45sml8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "cuenta-servicio-iam-python@bootcamp-cloud-thebridge.iam.gserviceaccount.com",
+  "client_id": "107581004013169362611",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cuenta-servicio-iam-python%40bootcamp-cloud-thebridge.iam.gserviceaccount.com"
+}
