@@ -1,0 +1,108 @@
+---
+- name: EC2 init setup 
+  hosts: aws_test
+  vars:
+    user_path: /home/ubuntu 
+    remote_path: /home/vinxu
+    awscli_url: 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
+  tasks:
+
+    - name: Create ec2_init_config folder
+      file:
+        path: "{{user_path}}/ec2_init_config"
+        state: directory
+
+    - name: Create .aws folder
+      file:
+        path: "{{user_path}}/.aws"
+        state: directory
+
+          #- name: Create aws folder
+          #file:
+          #path: "{{user_path}}/aws"
+          #state: directory
+
+    - name: Create init_requirements folder
+      file:
+        path: "{{user_path}}/init_requirements"
+        state: directory
+    
+    - name: Update apt list
+      apt:
+        update_cache: yes
+      become: True
+
+    - name: Install software properties common
+      apt:
+        name: software-properties-common
+        state: latest
+      become: True
+
+    - name: Install unzip
+      apt:
+        name: unzip
+        state: latest
+      become: True
+    
+    - name: Install Python
+      apt:
+        name: python3
+        state: latest
+      become: True
+   
+    - name: Install pip
+      apt:
+        name: pip
+        state: latest
+      become: True 
+        #- name: Download awscliv2.zip
+        #uri:
+        #url: "{{awscli_url}}"
+        #method: GET
+        #dest: "{{user_path}}/awscliv2.zip"
+        #force: yes
+
+    - name: Download awscliv2.zip
+      ansible.builtin.get_url:
+        url: "{{awscli_url}}"
+        dest: "{{user_path}}/awscliv2.zip"
+        mode: '0655'
+       
+    - name: Extract awscliv2.zip
+      shell: unzip awscliv2.zip -d $HOME/aws
+      args:
+        chdir: "{{user_path}}"
+
+          #    - name: Extract awscliv2.zip
+          #      ansible.builtin.unarchive:
+          #        src: "{{user_path}}/awscliv2.zip"
+          #        dest: "{{user_path}}/aws"
+          #        remote_src: false
+
+    - name: Install AWS CLI
+      shell: sudo "{{user_path}}"/aws/aws/install --update
+      args:
+        chdir: "{{user_path}}"
+      become: True
+
+    - name: Download requirements.txt file
+      copy:
+        src: "{{remote_path}}/bootcamp_cloud/aws_ansible/requirements.txt"
+        dest: "{{user_path}}/init_requirements"
+        mode: 0644
+
+    - name: AWS config file
+      copy:
+        dest: "{{user_path}}/.aws/config"
+        content: |
+          [default]
+          region = eu-west-3
+          output = json
+          [profile itadmin]    
+          region = eu-west-3
+          output = json
+
+    - name: Install Python modules
+      pip:
+        requirements: "{{user_path}}/init_requirements/requirements.txt"
+...
