@@ -6,8 +6,6 @@
 
 ---
 
-![img.png](img/GCP_Logo)
-
 
 ## Índice de contenidos
 
