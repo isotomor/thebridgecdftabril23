@@ -1,0 +1,1 @@
+https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/CHAP_TemplateQuickRef.html

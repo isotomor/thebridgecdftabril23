@@ -1,0 +1,227 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Plantilla CloudFormation que crea una VPC DNS-enabled, 2 subnets publicas, 2 subnets privadas, un gateway NAT, exportando los identificadores de la VPC y de las subnets publicas",
+    "Resources": {
+        "AppVPC": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "EnableDnsSupport": "true",
+                "EnableDnsHostnames": "true",
+                "CidrBlock": "10.0.0.0/16"
+            }
+        },
+        "PublicSubnetA": {
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment1": "Public subnet in eu-west-3a"
+            },
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                },
+                "CidrBlock": "10.0.1.0/24",
+                "AvailabilityZone" : "eu-west-3a",
+                "MapPublicIpOnLaunch" : true,
+                "Tags" : [ { "Key" : "Name", "Value" : "PublicSubnetA" } ]
+            }
+        },
+        "PublicSubnetB": {
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment1": "Public subnet in eu-west-3b"
+            },
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                },
+                "CidrBlock": "10.0.2.0/24",
+                "AvailabilityZone" : "eu-west-3b",
+                "MapPublicIpOnLaunch" : true,
+                "Tags" : [ { "Key" : "Name", "Value" : "PublicSubnetB" } ]
+            }
+        },
+        "InternetGateway": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "67fd98e3-5cae-4c59-a9ca-1ca1763edd39"
+                }
+            }
+        },
+        "VPCGatewayAttachment": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                },
+                "InternetGatewayId": {
+                    "Ref": "InternetGateway"
+                }
+            }
+        },
+        "PublicRouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                }
+            }
+        },
+        "PublicRoute": {
+            "Type": "AWS::EC2::Route",
+            "DependsOn": "VPCGatewayAttachment",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "InternetGateway"
+                }
+            }
+        },
+        "PublicSubnetARouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "PublicSubnetA"
+                },
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                }
+            }
+        },
+        "PublicSubnetBRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "PublicSubnetB"
+                },
+                "RouteTableId": {
+                    "Ref": "PublicRouteTable"
+                }
+            }
+        },
+        "PrivateSubnetA": {
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment1": "Private subnet in eu-west-3a"
+            },
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                },
+                "CidrBlock": "10.0.101.0/24",
+                "AvailabilityZone" : "eu-west-3a",
+                "Tags" : [ { "Key" : "Name", "Value" : "PrivateSubnetA" } ]
+            }
+        },
+        "PrivateSubnetB": {
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment1": "Private subnet in eu-west-3b"
+            },
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                },
+                "CidrBlock": "10.0.102.0/24",
+                "AvailabilityZone" : "eu-west-3b",
+                "Tags" : [ { "Key" : "Name", "Value" : "PrivateSubnetB" } ]
+            }
+        },
+        "NatGatewayEIP" : {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+                "Domain" : "vpc",
+                "Tags" : [ {"Key" : "Name", "Value" : "NatGatewayEIP" } ]
+            }
+          },
+        "NatGateway": {
+            "Type" : "AWS::EC2::NatGateway",
+            "Properties" : {
+                "AllocationId" : {"Fn::GetAtt": [
+                    "NatGatewayEIP",
+                    "AllocationId"
+                ]},
+                "SubnetId" : { "Ref" : "PublicSubnetA"},
+                "Tags" : [ {"Key" : "Name", "Value" : "NatGateway" } ]
+              }
+          },
+        "PrivateRouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "AppVPC"
+                }
+            }
+        },
+        "PrivateRoute": {
+            "Type": "AWS::EC2::Route",
+            "DependsOn": "NatGateway",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "NatGatewayId": {
+                    "Ref": "NatGateway"
+                }
+            }
+        },
+        "PrivateSubnetARouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "PrivateSubnetA"
+                },
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                }
+            }
+        },
+        "PrivateSubnetBRouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "PrivateSubnetB"
+                },
+                "RouteTableId": {
+                    "Ref": "PrivateRouteTable"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "VPCID": {
+            "Description": "VPC ID",
+            "Value": {
+                "Ref": "AppVPC"
+            }
+        },
+        "PublicSubnetAID": {
+            "Description": "The subnet A ID to use for public web servers",
+            "Value": {
+                "Ref": "PublicSubnetA"
+            }
+        },
+        "PublicSubnetBID": {
+            "Description": "The subnet B ID to use for public web servers",
+            "Value": {
+                "Ref": "PublicSubnetB"
+            }
+        },
+        "PrivateSubnetAID": {
+            "Description": "The private subnet A ID to use for app servers",
+            "Value": {
+                "Ref": "PrivateSubnetA"
+            }
+        },
+        "PrivateSubnetBID": {
+            "Description": "The private subnet B ID to use for app servers",
+            "Value": {
+                "Ref": "PrivateSubnetB"
+            }
+        }
+    }
+}

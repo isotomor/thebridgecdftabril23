@@ -1,0 +1,40 @@
+Cuando creamos una VPC con subnets accesible desde internet:
+
+VPC	
+	"Type": "AWS::EC2::VPC"
+InternetGateway
+	"Type": "AWS::EC2::InternetGateway"
+VPCGatewayAttachment
+	"Type": "AWS::EC2::VPCGatewayAttachment"
+
+	Enlaza la VPC con InternetGateway
+
+PublicRouteTable
+	"Type": "AWS::EC2::RouteTable"
+
+	Enlaza con la VPC
+PublicRoute
+	"Type": "AWS::EC2::Route"
+	Enlaza la PublicRouteTable con InternetGateway utilizando el VPCGatewayAttachment
+
+PublicSubNet y/o PrivateSubNet
+	"Type": "AWS::EC2::Subnet"
+
+PublicSubnetRouteTableAssociation
+	"Type": "AWS::EC2::SubnetRouteTableAssociation"
+
+	Enlaza una PublicSubNet o una PrivateSubNet con la PublicRouteTable
+
+
+
+También puede ser que haya que colar un NatGateway, 
+
+NatGateway
+     	"Type" : "AWS::EC2::NatGateway"	
+	
+	Enlaza una EIP con una PublicSubnet
+
+EIP
+        "Type" : "AWS::EC2::EIP",
+	
+	Hace que se pueda acceder a internet desde la NatGateway

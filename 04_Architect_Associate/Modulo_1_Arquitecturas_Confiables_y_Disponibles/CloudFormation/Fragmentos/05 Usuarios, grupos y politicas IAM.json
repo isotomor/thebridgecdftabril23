@@ -1,0 +1,104 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Descripción" : "Plantilla de muestra de AWS CloudFormation IAM_Users_Groups_and_Policies: Plantilla de ejemplo que muestra cómo crear usuarios, grupos y políticas de IAM. Crea un único usuario que es miembro de un grupo de usuarios y de un grupo de administradores. Cada uno de los grupos tiene asociadas diferentes políticas de IAM. Nota: Este ejemplo también crea un par AWSAccessKeyId/AWSSecretKey asociado al nuevo usuario. El ejemplo es un poco artificioso ya que crea todos los usuarios y grupos, normalmente usted estaría creando políticas, usuarios y/o grupos que contienen referencias a usuarios o grupos existentes en su entorno. Tenga en cuenta que tendrá que especificar la bandera CAPABILITY_IAM cuando cree la pila para permitir que esta plantilla se ejecute. Puede hacerlo a través de la consola de administración de AWS haciendo clic en la casilla de verificación que reconoce que entiende que esta plantilla crea recursos IAM o especificando el indicador CAPABILITY_IAM a la herramienta de línea de comandos cfn-create-stack o a la llamada a la API CreateStack. ",
+
+  "Parameters" : {
+    "Password": {
+      "NoEcho": "true",
+      "Type": "String",
+      "Description" : "New account password",
+      "MinLength": "1",
+      "MaxLength": "41",
+      "ConstraintDescription" : "the password must be between 1 and 41 characters"
+    }
+  },
+
+  "Resources" : {
+    "CFNUser" : {
+      "Type" : "AWS::IAM::User",
+      "Properties" : {
+        "LoginProfile": {
+          "Password": { "Ref" : "Password" }
+        }
+      }
+    },
+
+    "CFNUserGroup" : {
+      "Type" : "AWS::IAM::Group"
+    },
+
+    "CFNAdminGroup" : {
+      "Type" : "AWS::IAM::Group"
+    },
+
+    "Users" : {
+      "Type" : "AWS::IAM::UserToGroupAddition",
+      "Properties" : {
+        "GroupName": { "Ref" : "CFNUserGroup" },
+        "Users" : [ { "Ref" : "CFNUser" } ]
+      }
+    },
+
+    "Admins" : {
+      "Type" : "AWS::IAM::UserToGroupAddition",
+      "Properties" : {
+        "GroupName": { "Ref" : "CFNAdminGroup" },
+        "Users" : [ { "Ref" : "CFNUser" } ]
+      }
+    },
+
+    "CFNUserPolicies" : {
+      "Type" : "AWS::IAM::Policy",
+      "Properties" : {
+        "PolicyName" : "CFNUsers",
+        "PolicyDocument" : {
+          "Statement": [{
+            "Effect"   : "Allow",
+            "Action"   : [
+              "cloudformation:Describe*",
+              "cloudformation:List*",
+              "cloudformation:Get*"
+              ],
+            "Resource" : "*"
+          }]
+        },
+        "Groups" : [{ "Ref" : "CFNUserGroup" }]
+      }
+    },
+
+    "CFNAdminPolicies" : {
+      "Type" : "AWS::IAM::Policy",
+      "Properties" : {
+        "PolicyName" : "CFNAdmins",
+        "PolicyDocument" : {
+          "Statement": [{
+            "Effect"   : "Allow",
+            "Action"   : "cloudformation:*",
+            "Resource" : "*"
+          }]
+        },
+        "Groups" : [{ "Ref" : "CFNAdminGroup" }]
+      }
+    },
+
+    "CFNKeys" : {
+      "Type" : "AWS::IAM::AccessKey",
+      "Properties" : {
+        "UserName" : { "Ref": "CFNUser" }
+      }
+    }
+  },
+
+  "Outputs" : {
+    "AccessKey" : {
+      "Value" : { "Ref" : "CFNKeys" },
+      "Description" : "AWSAccessKeyId of new user"
+    },
+    "SecretKey" : {
+      "Value" : { "Fn::GetAtt" : ["CFNKeys", "SecretAccessKey"]},
+      "Description" : "AWSSecretKey of new user"
+    }
+  }
+}
+

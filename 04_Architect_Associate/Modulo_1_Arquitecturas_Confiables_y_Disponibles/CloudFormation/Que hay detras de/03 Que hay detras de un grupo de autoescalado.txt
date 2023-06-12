@@ -1,0 +1,45 @@
+Un grupo de autoescalado va a necesitar:
+	Una plantilla de lanzamiento que lance una instancia
+	Un balanceador de carga
+	Un security group
+
+TierLoadBalancer:
+        "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer"
+	
+	Enlaza con las subnets que necesite
+	Enlaza con el grupo de seguridad que necesite
+
+TierALBListener: 
+        "Type": "AWS::ElasticLoadBalancingV2::Listener"
+	Enlaza con un Load Balancer
+	Enlaza con el ARN de un certificado
+
+TierALBTargetGroup:
+	"Type": "AWS::ElasticLoadBalancingV2::TargetGroup"
+	Enlaza con la Id de la VPC
+
+TierAutoscalingGroup:
+	"Type": "AWS::AutoScaling::AutoScalingGroup"
+
+	Enlaza con las Id de las subnets
+	Enlaza con la plantilla de lanzamiento
+	Enlaza con el TargetGroup del LoadBalancer
+
+	Y se le tiene que pasar cuantas instancias escala, min, max, default
+	
+TierserverLaunchTemplate:
+        "Type": "AWS::EC2::LaunchTemplate"
+	En las properties se le dice que imagen, tipo de maquina
+	Enlaza con Security group
+	Enlaza con un par de claves
+
+
+TierAutoScalingPolicy:
+	"Type":"AWS::AutoScaling::ScalingPolicy"
+	Enlaz con el Grupo de autoescalado
+	Define qué metricas se van a utilizar para escalar
+
+TierserverSecurityGroup:
+        "Type" : "AWS::EC2::SecurityGroup"
+	Enlaza con la Id de VPC
+	Define los puertos accesibles	

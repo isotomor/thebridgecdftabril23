@@ -1,0 +1,13 @@
+aws acm list-certificates
+aws cloudformation validate-template --template-body file://app-stack.json
+aws cloudformation validate-template --template-body file://network-stack.json
+aws s3 cp network-stack.json s3://josecitocloud.click-cftemplates
+aws cloudformation deploy --template-file "app-stack.json" --stack-name "app-stack"
+aws cloudformation describe-stacks
+aws cloudformation describe-stacks --stack-name "app-stack"
+aws autoscaling describe-auto-scaling-instances
+
+
+aws ec2 terminate-instances --instance-ids i-01374c12518a73402 i-03ba8c06e87bcdac7
+aws cloudformation delete-stack --stack-name "app-stack"
+aws cloudformation describe-stacks

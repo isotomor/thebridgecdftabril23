@@ -1,0 +1,13 @@
+Cuando una instancia debe ser accesible (Internet o no) que necesita
+
+WebServerInstance
+	"Type": "AWS::EC2::Instance"
+
+	En el apartado NetworkInterfaces se tiene que especificar:
+	- El SecurityGroup
+	- El id de Subnet
+
+WebServerSecurityGroup
+    "Type": "AWS::EC2::SecurityGroup"
+	
+	Que se enganche a un VpcId

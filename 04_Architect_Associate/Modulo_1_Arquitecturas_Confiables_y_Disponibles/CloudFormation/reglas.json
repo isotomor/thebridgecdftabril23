@@ -1,0 +1,33 @@
+{
+    "Rules": {
+        "Rule01": {
+            "RuleCondition": {
+                "rule-specific intrinsic function": "Value01"
+            },
+            "Assertions": [
+                {
+                    "Assert": {
+                        "rule-specific intrinsic function": "Value02"
+                    },
+                    "AssertDescription": "Information about this assert"
+                },
+                {
+                    "Assert": {
+                        "rule-specific intrinsic function": "Value03"
+                    },
+                    "AssertDescription": "Information about this assert"
+                }
+            ]
+        },
+        "Rule02": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "rule-specific intrinsic function": "Value04"
+                    },
+                    "AssertDescription": "Information about this assert"
+                }
+            ]
+        }
+    }
+}

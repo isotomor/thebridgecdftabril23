@@ -1,0 +1,63 @@
+{
+    "Parameters": {
+        "EnvType": {
+            "Type": "String",
+            "AllowedValues": [
+                "prod",
+                "test"
+            ]
+        },
+        "BucketName": {
+            "Default": "",
+            "Type": "String"
+        }
+    },
+    "Conditions": {
+        "IsProduction": {
+            "Fn::Equals": [
+                {
+                    "Ref": "EnvType"
+                },
+                "prod"
+            ]
+        },
+        "CreateBucket": {
+            "Fn::Not": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "BucketName"
+                        },
+                        ""
+                    ]
+                }
+            ]
+        },
+        "CreateBucketPolicy": {
+            "Fn::And": [
+                {
+                    "Condition": "IsProduction"
+                },
+                {
+                    "Condition": "CreateBucket"
+                }
+            ]
+        }
+    },
+    "Resources": {
+        "Bucket": {
+            "Type": "AWS::S3::Bucket",
+            "Condition": "CreateBucket"
+        },
+        "Policy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Condition": "CreateBucketPolicy",
+            "Properties": {
+                "Bucket": {
+                    "Ref": "Bucket"
+                },
+                "PolicyDocument": "..."
+            }
+        }
+    }
+}

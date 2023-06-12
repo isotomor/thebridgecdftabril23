@@ -1,0 +1,7 @@
+- Id de la imagen que lo solemos asociar a una region mediante mapping
+
+- Un par de claves
+
+- Un security group
+
+- Uno o más volúmenes externos
