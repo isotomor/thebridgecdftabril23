@@ -1,0 +1,25 @@
+# File: azure-pipelines.yml
+trigger:
+- main
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      name: nahuic72/templates
+      endpoint: github.com_nahuic72
+
+extends:
+  template: start.yml@templates
+  parameters:
+    buildSteps:  
+      - bash: echo Test # Esto si pasa como un buildStep en el start.yml
+        displayName: succeed
+      - bash: echo "Test"
+        displayName: succeed
+      # El paso siguiente es rechazado lanzando un error de sintaxis YAML: Unexpected value 'CmdLine@2'
+      - task: CmdLine@2
+        inputs:
+          script: echo "Script Test"
+      # El paso siguiente es rechazado lanzando un error de sintaxis YAML: Unexpected value 'CmdLine@2'
+      - script: echo "Script Test"

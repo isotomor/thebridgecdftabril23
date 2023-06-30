@@ -1,0 +1,8 @@
+az group create --name MiSonarServer --location eastus
+
+
+
+
+
+
+az container create -g MiSonarServer --name sonarqubecontainer --image sonarqube --ports 9000 --dns-name-label misonarqubedns
