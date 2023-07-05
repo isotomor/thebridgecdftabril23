@@ -35,6 +35,8 @@ Consulte la documentación del módulo [aquí](https://docs.google.com/presentat
 ## CI en Azure Pipelines
 ***
 
+¿Qué es Azure pipelines? Pinche [aquí](https://learn.microsoft.com/es-es/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops) para conocerlo.
+
 Consulte la documentación del módulo [aquí](https://learn.microsoft.com/es-es/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops)
 Seguirá una guía para desplegar una app en Python a través de un tutorial de Azure.
 
