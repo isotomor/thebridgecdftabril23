@@ -44,7 +44,7 @@ Seguirá una guía para desplegar una app en Python a través de un tutorial de 
 
 Documentación deploy release in CD: [Classic release pipelines](https://www.golinuxcloud.com/deploy-web-app-ci-cd-pipeline-azure-devops/#Step_01_%E2%80%93_Deploy_Azure_WebApp_for_CICD_Pipeline)
 
-Consulte la documentación del módulo [aquí](https://docs.google.com/presentation/d/1uxgvti2NFoghZay5uRAPsogPCwCzOYUq/edit?usp=share_link&ouid=102384283797243178688&rtpof=true&sd=true)
+Consulte la documentación del módulo [aquí](https://docs.google.com/presentation/d/15quCo8bVYdVWssVWgPi8drIDd3worGajROzdRDMO9jw/edit#slide=id.p1)
 
 ## Mas alla en CD Kubernetes y Ansible
 ***
