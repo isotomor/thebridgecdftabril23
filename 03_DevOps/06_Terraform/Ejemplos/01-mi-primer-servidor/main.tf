@@ -5,6 +5,13 @@ provider "aws"{
   region="eu-west-3"
 }
 
+# -------------------------
+# Define default VPC
+# -------------------------
+data "aws_vpc" "default" {
+  default = true
+}
+
 # ---------------------------------------
 # Define una instancia EC2 con AMI Ubuntu
 # ---------------------------------------
@@ -27,6 +34,7 @@ resource "aws_instance" "mi_servidor" {
 # ------------------------------------------------------
 resource "aws_security_group" "mi_grupo_de_seguridad" {
   name   = "primer-servidor-sg"
+  vpc_id = data.aws_vpc.default.id
 
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
