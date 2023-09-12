@@ -6,7 +6,7 @@
 [_Cloud & DevOps_](https://www.thebridge.tech/bootcamps/bootcamp-cloud-devops) ofrecido en TheBridge 
 <img src="https://workablehr.s3.amazonaws.com/uploads/account/logo/401394/logo" width="100">**  
 
-## Índice de contenidos
+## :indice Índice de contenidos
     
 * [Ramp Up](01%20-%20RampUp)
   - [Modulo 0 - Conceptos Esenciales](01_RampUp/Modulo_0_Conceptos_basicos)
