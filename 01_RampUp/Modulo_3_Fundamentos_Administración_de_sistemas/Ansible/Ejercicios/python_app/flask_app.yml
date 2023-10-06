@@ -1,18 +1,22 @@
 - name: Iniciar la aplicación Flask
   hosts: nodo1
   become: yes
-
   tasks:
+
   - name: Instalar Flask
     pip:
       name: flask
       state: present
 
+- name: Iniciar la aplicación Flask
+  hosts: nodo1
+  become: false
+  tasks:
+
   - name: Ejecutar la aplicación Flask
-    command: python3 flask_app/main.py
+    command: python3 main.py
     async: 20
     poll: 0
-
 
   - name: Esperar a que la aplicación esté lista
     uri:
